@@ -1,0 +1,72 @@
+Tech Stack for the E-Commerce Store built...
+1. .Net Core Web API
+2. React JS
+3. Redux
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+.NET Ecosystem
+
+We generally use C# lang. which is converted to CLR using C# Runtime.
+We will also use libaries and packeges (Nuget)
+dotnet CLI to run and manage app.
+
+What's a Web API ?
+- HTTP based services on top of .NET
+- Can be consumed by:
+    - Browsers
+    - Mobile Apps
+    - IOT, etc.
+- REST
+    REST is a pattern for creating HTTP services.
+    Its a set of protocol.
+   Rules of REST are as follows:
+    - It works on Client-Server architecture.
+    - The communication must be stateless. Each request must be treated seperately and not return the cached response given of other client.
+    - The response can be cacheable if server allows so that it can be used later by browser in re-rendering UI.
+    - The interface for request and response should be uniform. It should not happen that one API is handled over HTTP and other is handled over some other protocol.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Creating a .NET solution and API project
+
+Go to cmd, direct to your folder
+dotnet --info :  tells the latest version of .NET o our machine.
+dotnet -h: gives list of commands (help)
+dotnet new list : this command gives list of .NET projects we can create with current SDK
+dotnet new sln : The template "Solution File" was created successfully.
+dotnet new webapi -o API : creates a new We API project where its output folder is named "API"
+dotnet sln add API : Project `API\API.csproj` added to the solution.
+code . :This will open the ReStore folder in VS Code.
+cd API: go to API folder.
+dotnet run : runs the application on a port. http://localhost:5147/swagger/index.html
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+VS Code Extensions needed for Dev
+
+C#
+C# Extensions
+Nuget Gallery
+Sqlite
+Auto Rename Tag
+After this, do >Reload Window from search bar above in VS Code,
+Click yes to a pop-up which will give a .vscode folder
+Then, turn "Auto Save" ON in "File" tab
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Adding Project to Github
+
+Go to Source Control Icon on VS Code on left navigation
+Click "Initialize Repository"
+We'll see many files there
+Go to terminal, type:
+    dotnet new gitignore
+This will ignore all .bin, .obj, ,vscode files etc which are not necessary.
+Now, the number files to be uploaded will be reduced.
+
+Also add appsettings.json to .gitignore by right clicking on it.
+So that we will avoid publishing this to GitHub, in case we have any secret keys stored inside it.
+
+
+
+
