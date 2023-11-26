@@ -67,6 +67,42 @@ Now, the number files to be uploaded will be reduced.
 Also add appsettings.json to .gitignore by right clicking on it.
 So that we will avoid publishing this to GitHub, in case we have any secret keys stored inside it.
 
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Inside Web API template.
+
+Program.cs 
+-----------
+we can see that our app is built using WebApplication.CreateBuilder(args);
+Our application runs on Kestrel web server.
+The congiruations in Program.cs helps Kestrel in setting up the app.
+
+We add dependamcy Injection in it.
+Some services like controllers, Swagger are already registered in it.
+We aso congure middlewares in it.
+
+API.csproj
+-------------
+This tells the .NET target framework
+
+Make the <nullable> as diabled,
+otherwise we see errors while developing app. 
+If it is enabled, it makes the "?" required for strings, throwing errors if not done so.
+So disable it.
+
+<ImplicitUsings>enable</ImplicitUsings>
+This helps us to use certain buil-in libraries without sepcifyin them explicitly.
+Use can see them in ~\Restore\API\obj\Debug\net7.0\API.GlobalUsings.g.cs
+
+appSettings.json
+-----------------
+Update below:
+"Microsoft.AspNetCore": "Information"
+So that we get maximum information about endpoints we hit, info we received, etc.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 
 
