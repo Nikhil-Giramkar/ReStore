@@ -102,6 +102,68 @@ So that we get maximum information about endpoints we hit, info we received, etc
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
+Entity Framework
+-------------------
+What is ? 
+
+    In old days, when we had to do mapping between our entities/model and DB tables,
+    Lets say, retrieve a list of products from Database,
+    We need to:
+        Open a connection to DB
+        execute a command
+        read data back from DB
+        map data from DB to our entities/model
+        remember to close the connection afterwards.
+
+    With Entity Framework, 
+        we do not need to do this anymore,
+        Its job is to take our C# entity objects (Product obj. in our case)
+        And it writes the SQL command for what we want to achieve ased on the code we write.
+        So, we conitune to write our code in C#, we don't need to wite SQL Queries.
+        EF is an Object Relational Mapper (ORM), which means it works with Relational Data and Relational DBs (SqlServer, Posgres, Oracle, SqlLite, etc).
+    
+    DbContext
+    ----------
+    We get a DbContext class from Entity framework.
+    This provides us a gateway to our database or provides a session to our database.
+    It's responsible for opening and managing connections to DB.
+
+    DbSets
+    -------
+    DbContext can have one or more DbSets.
+    These DbSets correspond to tables in our DB
+    We use LINQ to query our data in methods inside DbSets
+
+                LINQ                                    SQL
+        -----------------------------> DbSets -----------------------> DB
+        var products =                          select * from
+            context.products.ToList()                   products
+
+
+Features
+--------
+Modelling
+    EF works with our objects, referred as Plain Old Class Objects (POCOs)
+    That has get set properties and diff. data types 
+Querying
+    EF allows us to use LINQ queries.
+Change Tracking
+    EF tracks if anything is changed in DB
+Saving
+    It allows Saving our data in DB
+Concurrency
+    It will optimistically try and make changes in DB and if something goes wrong, it will be rolbacked.
+Transactions
+    Provides transaction management, we can build up a list of changes to be done in DB and all of that will go as a single transaction.
+Caching
+    For fast retrievals
+Migrations
+    Building DB and tables by looking st our code.
+
+Configurations,
+Built-in Conventions are also its features.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
