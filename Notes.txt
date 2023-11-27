@@ -164,6 +164,25 @@ Configurations,
 Built-in Conventions are also its features.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
+To Use Entity Framework
+------------------------
+Install 
+    EntityFrameworkCore.Sqlite
+    EntityFrameworkCore.Design
+of same version as that of dotnet on machine otherwise it won't work.
+
+Create a Data Folder in API folder for all Data related classes
+Create StoreConext class which extends DbContext (representing database)
+
+Add a constructor which takes DbContextOptions as parameter by right Click
+
+Add a DbSet as a property of type Product (representing table in our DB).
+
+We need to inform our app about DbContext so register this service in Program.cs and 
+inject the DbContextOptions in it
+sepcifying, that we are using SqlLite and use the default connection string
+Configure this def. conn. string in appsettings.Development.json
+
 
 
 
