@@ -265,6 +265,21 @@ GetProducts()
 GetProduct(id)
 Run the app (dotnet run) and check on Swagger.
 
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Make APIs Asynchronous
+-------------------------
+For small scale applications, it is Ok to query list of products directly from DB.
+When data is small or no. of users are less, we see no problem.
+
+But as the system starts scaling, data size becomes huge and load increases.
+Servers will keep the users waiting when they request for certain data.
+In such cases, we should not keep the user waiting and make the calls asynchronous.
+
+So that it will execute the rest of code and notify the caller, when response is ready.
+this can be done using async await.
+This prevents blocking of main thread.
+We use Task<> as wrapper around return types in async await functions
 
 
 
