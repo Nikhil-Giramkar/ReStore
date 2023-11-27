@@ -253,6 +253,18 @@ Run products table, we see all rows added.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
+Creating API Controllers to Get Products
+---------------------------------------------
+
+Go to Controllers folder,
+add ProductsController.cs same as WeatherForecasetController by right click and select ApiController
+Add StoreContext via Dependency Injection
+
+Create two ActionResult Methods/ APIs
+GetProducts()
+GetProduct(id)
+Run the app (dotnet run) and check on Swagger.
+
 
 
 
