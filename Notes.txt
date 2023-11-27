@@ -181,7 +181,42 @@ Add a DbSet as a property of type Product (representing table in our DB).
 We need to inform our app about DbContext so register this service in Program.cs and 
 inject the DbContextOptions in it
 sepcifying, that we are using SqlLite and use the default connection string
-Configure this def. conn. string in appsettings.Development.json
+Configure this def. conn. string in appsettings.Development.json.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+EF Migrations
+------------
+Go to : https://www.nuget.org/packages/dotnet-ef
+Install dotnetef via CLI    
+    dotnet tool install --global dotnet-ef --version 7.0.13
+    (Version same as dotnet on my machine)
+
+Stop the app if its already running
+Go to CLI and type:
+    dotnet ef migrations add InitialCreate -o Data/Migrations
+After successful completion,
+we see Migrations folder is created with 3 cs files in it.
+
+We are interested in TimeStamp_InitialCreate.cs
+Here, it is representing Product.cs in form of SqlLite table
+Up() fo creating Products table and Down() for dropping.
+
+Go to CLI:
+    dotnet ef database update
+This command will create a db file (database) based on InitialCreate.cs
+We can see "store.db" file in our Folder structure.
+Can't open it, go to search bar in VS Code and type:
+    >sqlite:Open Database
+        Select Database
+        We see new panel added "SqLite Explorer" in Left Navigation bar in VSCode
+
+Open store.db under Sqlite Explorer
+We see Products table (empty)
+and _EFMigrationsHistory table (having last update time and version)
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 
 
