@@ -32,4 +32,14 @@ app.UseAuthorization(); //For Auth
 
 app.MapControllers(); //For mapping request to correct controller
 
+var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<StoreContext>();
+var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+try{
+    context.Database.Migrate();
+    DbInitializer.Initialize(context);
+}
+catch(Exception ex){
+    logger.LogError(ex, "A problem occurred during migration");
+}
 app.Run(); //Terminal middleware

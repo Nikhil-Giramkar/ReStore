@@ -231,6 +231,28 @@ And Save changes
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
+Perform Migration and DB Initialization
+-----------------------------------------
+
+We can Perform Migration and DB Initialization automaticaly when App runs via Program.cs
+Just before app.run
+
+We can create a scope variable to take hold of StoreConext
+and ILogger for logging
+And Perform migrations and DB Initialization
+
+To see the effects, got to CLI and drop the store.db
+    dotnet ef database drop
+    press y
+The store.db is dropped.
+Add the above steps mentioned inside Program.cs
+And do dotnet run
+We see in CLI, all the rows being added in Products table
+Go to store.db by again adding SQLite Explorer from VS Code and selecting our db
+Run products table, we see all rows added.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
