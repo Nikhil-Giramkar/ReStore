@@ -216,7 +216,20 @@ We see Products table (empty)
 and _EFMigrationsHistory table (having last update time and version)
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
+Initialize Products Table 
+---------------------------
 
+Go to Data Folder, Create a static class DbInitializer
+Create a static method Initialize(StoreConext context)
+Add dummy data in it, ONLY if our table is empty.
+List of products given in Course Assets of 
+https://persistent.udemy.com/course/learn-to-build-an-e-commerce-store-with-dotnet-react-redux/learn/lecture/28964732#overview
+ProductSeed.txt
+
+Add that dummy data inside Products DbSet
+And Save changes
+
+---------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
