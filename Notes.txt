@@ -1,3 +1,6 @@
+SECTION 1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
 Tech Stack for the E-Commerce Store built...
 1. .Net Core Web API
 2. React JS
@@ -280,6 +283,24 @@ So that it will execute the rest of code and notify the caller, when response is
 this can be done using async await.
 This prevents blocking of main thread.
 We use Task<> as wrapper around return types in async await functions
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+SECTION 2
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Creating React App
+-------------------
+Instead of traditional creat-react-app, we will use Vite
+Go to Restore folder, open CLI  
+    npm create vite@latest
+    y
+    Proj Name: client
+    Select Framework: React
+    Select Variant: TypeScript + SWC (Speedy Web Compiler)
+    cd client
+    npm install
+    npm run dev
 
 
 
