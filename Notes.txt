@@ -302,6 +302,9 @@ Go to Restore folder, open CLI
     npm install
     npm run dev
 
+Changed Port No to 3000
+and start: vite
+Now, npm start will launch the client app on port 3000
 
 
 
