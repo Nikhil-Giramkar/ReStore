@@ -5,6 +5,9 @@ Tech Stack for the E-Commerce Store built...
 1. .Net Core Web API
 2. React JS
 3. Redux
+4. TypeScript
+5. SQLite DB
+6. Entity Framework Core
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
 .NET Ecosystem
@@ -305,6 +308,15 @@ Go to Restore folder, open CLI
 Changed Port No to 3000
 and start: vite
 Now, npm start will launch the client app on port 3000
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+UseState
+-------------
+React UseState is a hook in react, which acts as a memory store.
+We can use classes and objects in JS to do so, but it is pretty complex.
+So, with functional components we use certain hooks.
+useState is a hook, which keeps track of values stored in any variable
+It provides a setXXX function for setting new value to state variable.
 
 
 
