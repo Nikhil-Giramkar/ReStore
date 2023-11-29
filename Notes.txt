@@ -388,4 +388,11 @@ We can mark any field as optional by adding '?' in Interface property
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
+Files and Folder Organisation
+------------------------------
+create an "app" folder in src, to store everything related to our app.
+inside "app" create "layout" folder and add App.tsx and styles.css and say yes to all popups of VS Code
 
+Create "models" folder in "app" folder to store Product.ts and all such domain contacts in it.
+
+Create "features" in "src" to add  all new components in it.
