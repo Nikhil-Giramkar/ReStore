@@ -396,3 +396,20 @@ inside "app" create "layout" folder and add App.tsx and styles.css and say yes t
 Create "models" folder in "app" folder to store Product.ts and all such domain contacts in it.
 
 Create "features" in "src" to add  all new components in it.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Create Catalog component
+-------------------------------
+Add catalog.tsx in features folder,
+Pass products as props. Render the unordered list and addproducts button inside catalog.tsx
+
+The props can be marked of type : Any - but we loose the benefits of typecript here.
+So we will create an interface in Catalog.tsx for props.
+And specify, what we can get as props and what its type can be.
+We also get all the intellisense, if we hover over all objects.
+So whenever <Catalog /> is used somewhere, we will get an error stating that we need to pass products array and addProduct method to it.
+
+instead of using props. everywhere as a suffix in Catalog.tsx
+We can use destructuring {..,..} to spcify what properties we are interested in, from Props interface.
+So we do not need to add props. as suffix everywhere down.
+

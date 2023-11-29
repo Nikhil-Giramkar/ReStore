@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { Product } from "../models/Product";
+import { Catalog } from "../../features/Catalog";
 
 function App() {
 
@@ -34,13 +35,10 @@ function App() {
   return (
     <div>
       <h1>Re-Store</h1>
-      <ul>
-        {products.map((product) => ( //Map function to add li tag to each item
-          <li key={product.id}>{product.name} - {product.price}</li> //Adding index as unique key (for stable identity)
-        ))}
-      </ul>
 
-      <button onClick={addProduct}>Add Product</button>
+      <Catalog products={products}
+                addProduct={addProduct}/>
+
     </div>
   )
 }
