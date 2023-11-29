@@ -318,5 +318,10 @@ So, with functional components we use certain hooks.
 useState is a hook, which keeps track of values stored in any variable
 It provides a setXXX function for setting new value to state variable.
 
+UseEffect
+---------------
+React UseEffect hook allows us to add a side-effect to a component whe it loads.
+In react when component loads, we get access to its lifecycle.
+What to do when component mounts and when destroyed.
 
 
