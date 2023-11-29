@@ -336,4 +336,37 @@ And check console in browser, we get following error:
         Access to fetch at 'http://localhost:5000/api/products' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. 
         If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
 
+We see, in networks tab (preserve log and reload again)
+2 requests were made to backend to fetch products.
+This was because of 
+     <React.StrictMode>
+     </React.StrictMode> tags, 
+React tries its best to protect us from making mistake in our code. Its a normal behaviour.
+----------
+CORS
+-----------
+Now coming back to main problem, we got the error as stated above, inside our console and
+We could not data from our backend.
+This is because our origin of request is from localhost:3000
+and response is from localhost:5000
+So we are requesting data from different domain. Hence, our browser is protecting us.
+
+Cross-origin resource sharing (CORS) is a mechanism for integrating applications. 
+CORS defines a way for client web applications that are loaded in one domain to interact with resources in a different domain.
+
+So to solve this problem,
+we need to enable CORS in our "API" (backend app).
+
+So, going back to Program.cs, 
+we need to add a Service 
+    builder.Services.AddCors();
+
+and Middleware, just above UseAuthorization()
+    app.UseCors(opt => {
+    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+});
+
+Now, we get response from backend and we render in our frontend.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
 

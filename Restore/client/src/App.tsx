@@ -24,7 +24,7 @@ function App() {
       .then(res => res.json()) //promise returned
       .then(data => setProducts(data)); //promise returned -> state initialized
     }
-    ,[]) //Adding an empty depenedancy array, so that we fetch data only once when app loads
+    ,[]) //Adding an empty depenedancy array, so that we fetch data only once when app loads, else we will be trapped in endless loop
 
 
   return (

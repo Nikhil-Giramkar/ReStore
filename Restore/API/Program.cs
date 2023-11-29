@@ -16,6 +16,8 @@ builder.Services.AddDbContext<StoreContext>(options => {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnectionString"));
 });
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,6 +29,12 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection(); //Will not use this for dev, will use this in Production, hence commented
+
+app.UseCors(opt => {
+    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+    //Any Header, Any method - GET,PUT,POST,DELETE
+    //Only from localhost:3000 (our frontend app)
+});
 
 app.UseAuthorization(); //For Auth
 
