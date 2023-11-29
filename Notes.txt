@@ -369,4 +369,23 @@ and Middleware, just above UseAuthorization()
 Now, we get response from backend and we render in our frontend.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
+Creating TypeScript Interface
+------------------------------
+Create a new file, Product.ts (this is an interface)
+
+Go to: http://localhost:5000/swagger/index.html
+And take the response received and paste at https://transform.tools/json-to-typescript
+And copy the typescript generated and paste in the interface.
+This will avoid any spelling and data type mistakes.
+
+Now, in useState, we need to specify that products State is of type Product.ts
+We do so, by adding <Product[]>
+This tells useState tht the products, is an array of type Product.ts
+
+Now, we also need to midift addProducts() method, as all properties of interface are required
+We can mark any field as optional by adding '?' in Interface property
+    quantityInStock?: number
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
 
