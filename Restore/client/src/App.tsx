@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 
 function App() {
 
@@ -17,6 +17,16 @@ function App() {
         }
       ])
     }
+
+    //UseEffect 
+    useEffect(()=>{
+      fetch('http://localhost:5000/api/products') 
+      .then(res => res.json()) //promise returned
+      .then(data => setProducts(data)); //promise returned -> state initialized
+    }
+    ,[]) //Adding an empty depenedancy array, so that we fetch data only once when app loads
+
+
   return (
     <div>
       <h1>Re-Store</h1>

@@ -324,4 +324,16 @@ React UseEffect hook allows us to add a side-effect to a component whe it loads.
 In react when component loads, we get access to its lifecycle.
 What to do when component mounts and when destroyed.
 
+In our example, we initialized "products" in App.tsx by fetching data from backend.
+For that, our dotnet web api must be running.
+    dotnet run
+Then inside useEffect, we resolved promises and called setProducts to initialize data.
+We also passed an empty Dependency Array, so that we fetch data only once when component loads.
+
+But on doing 
+    npm start
+And check console in browser, we get following error:
+        Access to fetch at 'http://localhost:5000/api/products' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. 
+        If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+
 
