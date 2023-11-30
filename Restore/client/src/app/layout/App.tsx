@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { Product } from "../models/Product";
 import { Catalog } from "../../features/Catalog";
+import { Typography } from "@mui/material";
 
 function App() {
 
@@ -34,7 +35,7 @@ function App() {
 
   return (
     <div>
-      <h1>Re-Store</h1>
+      <Typography variant="h1">Re-Store</Typography>
 
       <Catalog products={products}
                 addProduct={addProduct}/>
