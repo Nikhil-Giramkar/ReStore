@@ -444,3 +444,10 @@ create Header.tsx in layout folder.
 
 Make productCard look like a Card from Material Ui
 
+
+Using Dark Mode
+-------------------
+W can do so, by createTheme provided by Material UI
+which automatically sets the correct dark mode color for existing colors used in App.
+Using Switch component of Material Ui to add a toggle button.
+
