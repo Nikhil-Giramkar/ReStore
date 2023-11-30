@@ -435,6 +435,12 @@ Use <Typography>, <List>, <Button> as given in Docs of metrial UI
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
 Add seperate components for ProductList and ProductCard
--------------------------------------------------
+-----------------------------------------------------
 Rendering all products in a list called ProductList.
 Where each list item is a ProductCard.
+
+Create an AppBar from Material UI
+create Header.tsx in layout folder.
+
+Make productCard look like a Card from Material Ui
+

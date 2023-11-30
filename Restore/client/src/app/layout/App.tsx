@@ -1,7 +1,8 @@
 import React, { useEffect } from "react"
 import { Product } from "../models/Product";
 import { Catalog } from "../../features/catalog/Catalog";
-import { Typography } from "@mui/material";
+import Header from "./Header";
+import { Container } from "@mui/material";
 
 function App() {
 
@@ -34,13 +35,17 @@ function App() {
 
 
   return (
-    <div>
-      <Typography variant="h1">Re-Store</Typography>
+    <>
+  
+      <Header />
 
-      <Catalog products={products}
-                addProduct={addProduct}/>
+      <Container>
+      <Catalog products={products} 
+              addProduct={addProduct}/>
+      </Container>
 
-    </div>
+
+    </>
   )
 }
 
