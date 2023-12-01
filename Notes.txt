@@ -504,4 +504,16 @@ Make company logo route to home page.
 
 Add styling to navbar links
 Group different elements in Box for styling
+-----------------------------------------------------------------------------------------------
+
+UseParams hook
+-------------------
+useParams is a hook provided by react-router.
+That helps in capturing the url details.
+In out case, product id.
+
+useEffect for fetching product each time when id changes, hence added  id in Dependency Array.
+Fetched data via axios and not traditional fetch API
+
+Did some basic error handling when product not found.
 
