@@ -490,4 +490,11 @@ In index.tsx, we load <App /> via <RouterProvider>
 For each children element in <App />, we use <outlet/> //see the comments in code
 -----------------------------------------------------------------------------------------------
 
+Add Navigation links in App Bar
+
+Create an array of Navigation links
+And use map() function inside <List> to iterate over them.
+To render these ListItems as navigation links
+pass NavLink (belonging to rect-router) as 'component' prop in ListItem tag.
+the 'to' prop is mandatory, so specify path in it.
 
