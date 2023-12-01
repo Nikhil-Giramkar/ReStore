@@ -1,5 +1,5 @@
 import { ShoppingCart } from "@mui/icons-material";
-import { AppBar, Badge, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
+import { AppBar, Badge, Box, IconButton, List, ListItem, Switch, Toolbar, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 interface Props {
     darkMode: boolean;
@@ -19,13 +19,13 @@ const rightLinks = [
 
 
 const navLinkStyles = {
-    color: 'inherit', 
+    color: 'inherit',
     textDecoration: 'none',
     typography: 'h6',
-    '&:hover':{
+    '&:hover': {
         color: 'grey.500'
     },
-    '&.active':{
+    '&.active': {
         color: 'text.primary'
     }
 }
@@ -33,15 +33,20 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
     return (
         <>
             <AppBar position="static" sx={{ mb: 4 }}>
-                <Toolbar>
-                    <Typography variant='h6'
-                        component={NavLink}
-                        to='/'
-                        sx={navLinkStyles}>
-                        RE-STORE
-                    </Typography>
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    
+                    
+                    <Box sx={{ display: 'flex', alignItems: 'center'}}>
+                        <Typography variant='h6'
+                            component={NavLink}
+                            to='/'
+                            sx={navLinkStyles}>
+                            RE-STORE
+                        </Typography>
+                        <Switch checked={darkMode} onChange={handleThemeChange} />
+                    </Box>
 
-                    <Switch checked={darkMode} onChange={handleThemeChange} />
+
 
                     <List sx={{ display: 'flex' }}>
                         {midLinks.map(({ title, path }) => (
@@ -56,24 +61,28 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
                         ))}
                     </List>
 
-                    <IconButton size="large" edge='start' color='inherit' sx={{ mr: 2 }}>
-                        <Badge badgeContent={5} color="secondary">          
-                            <ShoppingCart />
-                        </Badge>
-                    </IconButton>
 
-                    <List sx={{ display: 'flex' }}>
-                        {rightLinks.map(({ title, path }) => (
-                            <ListItem
-                                component={NavLink} // List Item rendered as NavLink
-                                to={path} //to property specifies path to navigate to
-                                key={path} //Need to add a key
-                                sx={navLinkStyles}
-                            >
-                                {title.toUpperCase()}
-                            </ListItem>
-                        ))}
-                    </List>
+
+                    <Box sx={{ display: 'flex', alignItems: 'center'}}>
+                        <IconButton size="large" edge='start' color='inherit' sx={{ mr: 2 }}>
+                            <Badge badgeContent={5} color="secondary">
+                                <ShoppingCart />
+                            </Badge>
+                        </IconButton>
+
+                        <List sx={{ display: 'flex' }}>
+                            {rightLinks.map(({ title, path }) => (
+                                <ListItem
+                                    component={NavLink} // List Item rendered as NavLink
+                                    to={path} //to property specifies path to navigate to
+                                    key={path} //Need to add a key
+                                    sx={navLinkStyles}
+                                >
+                                    {title.toUpperCase()}
+                                </ListItem>
+                            ))}
+                        </List>
+                    </Box>
 
 
                 </Toolbar>
