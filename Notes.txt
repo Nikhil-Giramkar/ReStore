@@ -500,3 +500,5 @@ the 'to' prop is mandatory, so specify path in it.
 
 Add a shopping cart icon between midLinks and rightLinks
 
+Make company logo route to home page
+

@@ -22,7 +22,13 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
         <>
             <AppBar position="static" sx={{ mb: 4 }}>
                 <Toolbar>
-                    <Typography variant='h6'>RE-STORE</Typography>
+                    <Typography variant='h6'
+                        component={NavLink}
+                        to='/'
+                        sx={{textDecoration: 'none', color: 'inherit'}}>
+                        RE-STORE
+                    </Typography>
+
                     <Switch checked={darkMode} onChange={handleThemeChange} />
 
                     <List sx={{ display: 'flex' }}>
