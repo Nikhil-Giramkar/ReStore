@@ -17,6 +17,18 @@ const rightLinks = [
     { title: 'register', path: '/register' },
 ]
 
+
+const navLinkStyles = {
+    color: 'inherit', 
+    textDecoration: 'none',
+    typography: 'h6',
+    '&:hover':{
+        color: 'grey.500'
+    },
+    '&.active':{
+        color: 'text.primary'
+    }
+}
 export default function Header({ darkMode, handleThemeChange }: Props) {
     return (
         <>
@@ -25,7 +37,7 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
                     <Typography variant='h6'
                         component={NavLink}
                         to='/'
-                        sx={{textDecoration: 'none', color: 'inherit'}}>
+                        sx={navLinkStyles}>
                         RE-STORE
                     </Typography>
 
@@ -37,7 +49,7 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
                                 component={NavLink} // List Item rendered as NavLink
                                 to={path} //to property specifies path to navigate to
                                 key={path} //Need to add a key
-                                sx={{ color: 'inherit', typography: 'h6' }}
+                                sx={navLinkStyles}
                             >
                                 {title.toUpperCase()}
                             </ListItem>
@@ -56,7 +68,7 @@ export default function Header({ darkMode, handleThemeChange }: Props) {
                                 component={NavLink} // List Item rendered as NavLink
                                 to={path} //to property specifies path to navigate to
                                 key={path} //Need to add a key
-                                sx={{ color: 'inherit', typography: 'h6' }}
+                                sx={navLinkStyles}
                             >
                                 {title.toUpperCase()}
                             </ListItem>
