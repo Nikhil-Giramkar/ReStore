@@ -480,4 +480,14 @@ React Router Install via CLI in Clinet folder
 Create folders and files for Home, Contact, About and ProductDetails in features folder
 
 
+Create router -> Routes.tsx in app folder.
+here, we specify all the possible routes in app.
+    '/' routes to basic component -> <App />
+    and all other elements are mentioned in children array,
+    These will be loaded, as per the path specified, on top of parent, <App />
+
+In index.tsx, we load <App /> via <RouterProvider> 
+For each children element in <App />, we use <outlet/> //see the comments in code
+-----------------------------------------------------------------------------------------------
+
 

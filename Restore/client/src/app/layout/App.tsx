@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Catalog } from "../../features/catalog/Catalog";
 import Header from "./Header";
 import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { Outlet } from "react-router-dom";
 
 function App() {
 
@@ -29,7 +30,10 @@ function App() {
       <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
 
       <Container >
-        <Catalog />
+        <Outlet /> 
+        {/* Each children element of <App /> will be loaded in place of <Outlet />
+        Whenever that specific path is mentioned in URL as per Router.tsx.
+         */}
       </Container>
 
 
