@@ -1,4 +1,5 @@
-SECTION 1
+---------------------------------------------------------------------------------------------------------------------------------------------
+                                            SECTION 1
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
 Tech Stack for the E-Commerce Store built...
@@ -288,8 +289,8 @@ This prevents blocking of main thread.
 We use Task<> as wrapper around return types in async await functions
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
-
-SECTION 2
+---------------------------------------------------------------------------------------------------------------------------------------------
+                                            SECTION 2
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
 Creating React App
@@ -450,4 +451,33 @@ Using Dark Mode
 W can do so, by createTheme provided by Material UI
 which automatically sets the correct dark mode color for existing colors used in App.
 Using Switch component of Material Ui to add a toggle button.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+                                            SECTION 3
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Now, we will use 
+    React-Router
+        In older days, whenever we cliked a link to go to next page.
+        We used to visit a new HTML web page.
+        Even the navbar had to be loaded again for each page.
+        Nowadays, we use Single Page Application (SPA) technologies like React and Angular.
+        So only certain components get loaded on performing any action.
+        To go through these components, we use React-Router for routing.
+        Can be used with React JS or React Native both.
+
+    Axios
+        Its an HTTP Client
+        Its basically an easy and powerful replacement of fetch API.
+        Offer imilar functionality to Angular HTTP Client.
+        It can intercep requests and response.
+-----------------------------------------------------------------------------------------------
+React Router Install via CLI in Clinet folder
+        npm install react-router-dom
+
+Create folders and files for Home, Contact, About and ProductDetails in features folder
+
+
 
