@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Catalog } from "../../features/catalog/Catalog";
 import Header from "./Header";
 import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { Outlet } from "react-router-dom";
