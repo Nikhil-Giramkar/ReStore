@@ -567,3 +567,15 @@ Create an agent object, add Catalog in it.
 Now we can replace Axios calls in Product Details and fetch() in Catalog.tsx
 by the agent, to make code more cleaner.
 ---------------------------------------------------------------------------------------------------------------------------------------------
+
+Create Axios requests to hit BuggyController endpoints in agent.ts
+Use About Page, to test these errors
+    Open Network Tab beside console
+    Look at Preview when you click on any of the test button.
+
+Currently in ProductDetails,
+If we send a wrong productId, we get 204 No Content Error
+Instead we should get 404 not found error.
+Actually, in backend, we are not checking for null. We must return NotFound() if we get null response from DbContext.
+After correcting this,
+And making wrong id call, we see 404 error in console.
