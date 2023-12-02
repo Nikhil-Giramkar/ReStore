@@ -526,3 +526,7 @@ Created UI for ProductDetails Page using Material UI attributes.
 First of All, in Controller folder in API
 We will create a BaseApiController as parent class, to avoid writing
 redundant code and follow DRY principle.
+
+Added a BuggyController classWhich will return us 
+all possible types of errors from Backend.
+Tested them on Swagger to see the response. 
