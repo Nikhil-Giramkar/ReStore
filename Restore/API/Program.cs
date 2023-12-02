@@ -1,4 +1,5 @@
 using API.Data;
+using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,14 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 //Here we add middlewares
+
+// app.UseDeveloperExceptionPage();
+// This is the middleware which is at the top and is responsible for throwing any server side errors
+// Before .NET6, it used to be present in this file but in later versions, Microsoft decided to minimalize the
+// Boiler plate code and add this middleware in background, hence it does exist, but we donot see it here.
+
+app.UseMiddleware<ExceptionMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -529,4 +529,18 @@ redundant code and follow DRY principle.
 
 Added a BuggyController classWhich will return us 
 all possible types of errors from Backend.
-Tested them on Swagger to see the response. 
+Tested them on Swagger to see the response.
+
+Create a custom middleware to perform Exception Handling on backend.
+In the constructor add 
+    RequestDelegate (to pass on to next piece of middleware)
+    ILogger (to log details)
+    HostEnvironment (to check the environment)
+Create InvokeAsync() method,
+    Call _next() if all good
+    else catch the exception and send it as jsonResponse
+
+Put this middleware at top in Program.cs
+
+Now check, server-error endpoint on swagger.
+Now any exception thrown by backend is passed as a jsonResponse in neat way, like other responses.
