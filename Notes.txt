@@ -544,3 +544,26 @@ Put this middleware at top in Program.cs
 
 Now check, server-error endpoint on swagger.
 Now any exception thrown by backend is passed as a jsonResponse in neat way, like other responses.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Centralizing all Axios Requests at one place.
+-----------------------------------------------
+Axios has a powerful feature called interceptor.
+So it manipulate requests and response.
+Hence it has an edge over fetch() API
+
+So, we will now write cleaner axios queries everywhere, by centralizing axios at one place.
+
+Create api->"agent.ts" in API folder.
+use axios object
+    Add baseURL
+    Render response as json 
+    create get, pu, post, delete queries, with paramaters
+
+Create a Catalog object and mention all kinds of requests it makes.
+
+Create an agent object, add Catalog in it.
+
+Now we can replace Axios calls in Product Details and fetch() in Catalog.tsx
+by the agent, to make code more cleaner.
+---------------------------------------------------------------------------------------------------------------------------------------------

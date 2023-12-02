@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Product } from "../../app/models/Product"
 import ProductList from "./ProductList";
+import agent from "../../app/api/agent";
 
 export function Catalog() {
 
@@ -9,9 +10,7 @@ export function Catalog() {
 
     //UseEffect 
     useEffect(() => {
-        fetch('http://localhost:5000/api/products')
-            .then(res => res.json()) //promise returned
-            .then(data => setProducts(data)); //promise returned -> state initialized
+        agent.Catalog.list().then(products =>  setProducts(products));
     }
         , []) //Adding an empty depenedancy array, so that we fetch data only once when app loads, else we will be trapped in endless loop
 
