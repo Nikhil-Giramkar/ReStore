@@ -591,3 +591,9 @@ So wherever we catch error like in ProductDetails or AboutPage (Test buttons),
         we wll see error.response.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
+Install React-Toastify.
+To show toast notifications
+Now in axios interceptor in agent.ts
+    we can show errors as toast notifications.
+So in any feature if we catch error
+Will will also get toast notification.
