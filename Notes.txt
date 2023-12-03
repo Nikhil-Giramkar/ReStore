@@ -597,3 +597,9 @@ Now in axios interceptor in agent.ts
     we can show errors as toast notifications.
 So in any feature if we catch error
 Will will also get toast notification.
+
+Validation Errors also throw 400 status code.
+So handle them in case 400, inside switch case block in agent.ts interceptors to throw list of errors
+
+catch the array of errors in About Page in a state.
+If errors received, show them with <Alert> of material ui

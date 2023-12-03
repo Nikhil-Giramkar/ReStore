@@ -22,7 +22,7 @@ namespace API.Controllers
         [HttpGet("validation-error")]
         public IActionResult GetValidationError(){
             ModelState.AddModelError("Problem 1", "This is first problem");
-            ModelState.AddModelError("Problem 2", "This is first problem");
+            ModelState.AddModelError("Problem 2", "This is second problem");
             return ValidationProblem();
 
         }
