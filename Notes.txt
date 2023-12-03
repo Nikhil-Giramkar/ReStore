@@ -579,3 +579,15 @@ Instead we should get 404 not found error.
 Actually, in backend, we are not checking for null. We must return NotFound() if we get null response from DbContext.
 After correcting this,
 And making wrong id call, we see 404 error in console.
+---------------------------------------------------------------------------------------------------------------------------------------------
+Axios Interceptors cn be used to catch the errors coming from response
+Instead of showing a red error in console.
+We can Catch the error by
+    returning Promise.reject(error.response)
+
+So wherever we catch error like in ProductDetails or AboutPage (Test buttons),
+    if we just console.log(error), 
+        "Error caught by Interceptor" &
+        we wll see error.response.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
