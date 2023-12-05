@@ -6,9 +6,15 @@ axios.defaults.baseURL = "http://localhost:5000/api/"
 
 const responseBody = (response : AxiosResponse) => response.data;
 
+const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
+
+
 //Using Axios interceptors to handle errors in response
-axios.interceptors.response.use(response =>{
+axios.interceptors.response.use(async response =>{
+    await sleep(); //Adding a fake delay to look realistic
+
     return response; // return the response if promise fulfilled
+
 }, (error: AxiosError) =>{
     
     const {data, status} = error.response as AxiosResponse;
@@ -41,7 +47,7 @@ axios.interceptors.response.use(response =>{
         default:
             break;
     }
-    return Promise.reject(error.response)
+    return Promise.reject(error.response) //This helps in directly conse logging error istead of error.response
 })
 
 const requests = {
