@@ -7,6 +7,7 @@ import NotFound from "../../app/errors/NotFound";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 
 export default function ProductDetails(){
+    //debugger;
 
     const {id} = useParams<{id: string}>();
 

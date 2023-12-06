@@ -603,3 +603,20 @@ So handle them in case 400, inside switch case block in agent.ts interceptors to
 
 catch the array of errors in About Page in a state.
 If errors received, show them with <Alert> of material ui
+---------------------------------------------------------------------------------------------------------------------------------------------
+Debugging in ASP.NET Core in VS Code
+
+Click Run and Debug option in leftmost bar.
+We have two options 
+.NET Core launch(web) -  to go in debug mode as soon as app launches (required to debug Program.cs).
+.NET Core Attach - to attach  when app is already running
+
+Click Run button
+Select our backend app -> API.exe 
+Now we are in debug mode.
+
+For a react app:
+Just using the "debugger;" word anywhere in code
+Will add a breakpoint.
+Go to Inspect -> Sources (beside console) -> We see our code stops at that line
+We get options to Step Over and Step In
