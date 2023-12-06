@@ -620,3 +620,18 @@ Just using the "debugger;" word anywhere in code
 Will add a breakpoint.
 Go to Inspect -> Sources (beside console) -> We see our code stops at that line
 We get options to Step Over and Step In
+
+Linting
+-------------
+Linting is the automated checking of your source code for programmatic and stylistic errors.
+In React we can see potential errors by closing the frontend, going to CLI, run: 
+    npm run lint
+This gave us 2 errors
+  \src\app\api\agent.ts
+1.  55:38  error  Don't use `{}` as a type. `{}` actually means "any non-nullish value".
+2. 56:37  error  Don't use `{}` as a type. `{}` actually means "any non-nullish value".
+
+But we want the VS Code to tell these errors as soon as we type them.
+So for that we can download an extension of "ESLint" by Microsoft.
+Now, this notifies us errors in any file.
+Even if we skip Dependency array for useEffect by using return statement, it will notify us.

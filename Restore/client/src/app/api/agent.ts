@@ -52,8 +52,8 @@ axios.interceptors.response.use(async response =>{
 
 const requests = {
     get: (url: string) => axios.get(url).then(responseBody),
-    post: (url: string, requestBody: {}) => axios.post(url, requestBody).then(responseBody),
-    put: (url: string, requestBody: {}) => axios.put(url, requestBody).then(responseBody),
+    post: (url: string, requestBody: object) => axios.post(url, requestBody).then(responseBody),
+    put: (url: string, requestBody: object) => axios.put(url, requestBody).then(responseBody),
     delete: (url: string) => axios.delete(url).then(responseBody)
 }
 
