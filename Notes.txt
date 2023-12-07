@@ -635,3 +635,10 @@ But we want the VS Code to tell these errors as soon as we type them.
 So for that we can download an extension of "ESLint" by Microsoft.
 Now, this notifies us errors in any file.
 Even if we skip Dependency array for useEffect by using return statement, it will notify us.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+                                            SECTION 5 - Shopping Cart
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Lets Create The Basket Entity
+and BasketItem to store baskets on server.
