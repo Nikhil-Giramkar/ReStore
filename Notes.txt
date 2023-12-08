@@ -642,3 +642,38 @@ Even if we skip Dependency array for useEffect by using return statement, it wil
 
 Lets Create The Basket Entity
 and BasketItem to store baskets on server.
+
+We donot need to explicitly mention BasketItem DbSet as we are not going to query it.
+Go to CLI
+    dotnet ef migrations add BasketEntityAdded
+
+We are not happy with migration so run 
+    dotnet ef migrations remove
+
+In migration created just now, even if we deleted a basket, basket items were retained in DB.
+And BasketItem was name of table created automatically, we wanted plural name.
+
+So to achieve this,
+1. We add extra navigation properties in BasketItem 
+    BasketId 
+    Basket
+    to define relation at both sides
+2. Use Data Annotation to pluralise name of table.
+    [Table("BasketItems")]
+
+If we now check the migration, we see
+    name: "FK_BasketItems_Baskets_BasketId",
+    onDelete: ReferentialAction.Cascade
+It means, if we delete a basket, it will also delete a basketItem
+
+     name: "FK_BasketItems_Products_ProductId",
+     onDelete: ReferentialAction.Cascade
+It means, if we delete a product, that will also delete the basket Item.
+
+Once we are satisfied with our migration, we run
+    dotnet run
+
+Search:
+    >Sqlite - Open Database
+    In above search bar
+And check that tables added.
