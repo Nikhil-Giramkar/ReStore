@@ -744,5 +744,17 @@ for that go to CLI
     npm install @mui/lab @mui/material
 
 Now before testing, the add functionality, make sure to delete the cookie.
+Check, the network tab before pressing Add Item button, youbwill notice what response we get
+and a new buyerId cookie stored in Application tab.
+---------------------------------------------------------------------------------------------------------------------------------------------
 
+Basket component
+Now to create a basket component, we need to know the shape of Basket object
+Go to swagger, copy object from Get request and paste in https://transform.tools/json-to-typescript
+And generate a model class accordingly.
+
+Add a new folder in features => basket
+Create BasketPage.tsx
+Add new route in Router.tsx
+Link that to Shopping Cart Icon
 
