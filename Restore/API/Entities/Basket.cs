@@ -29,9 +29,9 @@ namespace API.Entities
             }
         }
 
-        public void RemoveItem(Product product, int quanity)
+        public void RemoveItem(int productId, int quanity)
         {
-            var item = Items.FirstOrDefault(item => item.ProductId == product.Id);
+            var item = Items.FirstOrDefault(item => item.ProductId == productId);
             if(item == null)
                 return;
             item.Quantity -= quanity;
