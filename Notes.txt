@@ -677,3 +677,36 @@ Search:
     >Sqlite - Open Database
     In above search bar
 And check that tables added.
+
+Open Swagger, make a post request, debug line by line.
+And check the changes that happen.
+At the end, go to browser, go to Inspect -> Application -> Cookies
+We see a cookie added for buyerId with a new Guid.
+Also, the same data is stored in Basket table in store.db
+
+But when we try to GetBasket() after this, we get an internal server error.
+Why?
+    Error had come from the Json Serializer.
+    Its telling us that possible object cycle was detected.
+    Our API Controller tries to generate a JsonResponse.
+    It takes a look at the objects its trying to return and try to format that to JSON.
+
+    But if we take a look at Basket class.
+    We have list of BasketItems
+    and in BasketItem class, we have reference to product and basket.
+    Lets consider, this navigation property Basket. It tries to serialze basket
+    But, This basket has BasketItems internally, it tries to serialize basketItems list again,
+    But this BasketItem has reference to basket, so it keeps on serialaizing in an endless loop.
+    Similarly for Product.
+
+But, we do not want to return an entity, we need to shape the data, we wish to return.
+When we return Basket Item, we weish to know the details of product in it, not the Product as an object.
+So we will create some objects, that will shape our data we wish to return.
+
+These type of objects are referred to as DTOs (Data Transfer Objects)
+These are simple plain objects that contain properties that we want to extract from our entities and return with our response.
+
+So we create BasketDTO and BasketItemDTO
+In GetBasket(),
+    We will return BasketDTO
+    Where basketItemDTO properties will be filled, based on basket retrieved from _context.

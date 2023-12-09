@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using API.Data;
+using API.DTOs;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,13 +24,26 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Basket>> GetBasket()
+        public async Task<ActionResult<BasketDTO>> GetBasket()
         {
             Basket basket = await RetrieveBasket();
             if (basket == null)
                 return NotFound();
 
-            return basket;
+            return new BasketDTO
+            {
+                Id = basket.Id,
+                BuyerId = basket.BuyerId,
+                Items = basket.Items.Select(item => new BasketItemDTO{
+                    ProductId = item.ProductId,
+                    Name = item.Product.Name,
+                    Price = item.Product.Price,
+                    PictureUrl = item.Product.PictureUrl,
+                    Brand = item.Product.Brand,
+                    Type = item.Product.Type,
+                    Quantity = item.Quantity,
+                }).ToList()
+            };
         }
 
         [HttpPost]
