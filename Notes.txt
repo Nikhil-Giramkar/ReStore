@@ -757,4 +757,19 @@ Add a new folder in features => basket
 Create BasketPage.tsx
 Add new route in Router.tsx
 Link that to Shopping Cart Icon
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Now, we need to update the number present in shopping cart Icon,
+But for that, we need the access of our basket items.
+But Basket Items are set inside the BasketPage.
+But Basket Page and shopping Cart Ison are 2 different components.
+I want to increment basket count from Catalog component as well.
+as soon as I add any item to basket.
+
+How to exchange this data between completely different components?
+For that, we created StoreContext using useContext hook of react.
+
+Anything mentioned in Context API can be accessed globally, by any component.
+In Context API, we store states, functions to make accessible globally.
+
 
