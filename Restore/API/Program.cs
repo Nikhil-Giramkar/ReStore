@@ -40,8 +40,9 @@ if (app.Environment.IsDevelopment())
 //app.UseHttpsRedirection(); //Will not use this for dev, will use this in Production, hence commented
 
 app.UseCors(opt => {
-    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
     //Any Header, Any method - GET,PUT,POST,DELETE
+    //AllowCredentials() will allow to pass cookies from 3000 to 5000 and vice versa
     //Only from localhost:3000 (our frontend app)
 });
 

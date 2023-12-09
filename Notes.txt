@@ -678,6 +678,8 @@ Search:
     In above search bar
 And check that tables added.
 
+---------------------------------------------------------------------------------------------------------------------------------------------
+
 Open Swagger, make a post request, debug line by line.
 And check the changes that happen.
 At the end, go to browser, go to Inspect -> Application -> Cookies
@@ -710,3 +712,24 @@ So we create BasketDTO and BasketItemDTO
 In GetBasket(),
     We will return BasketDTO
     Where basketItemDTO properties will be filled, based on basket retrieved from _context.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Currently, we are not sending the Staus 201 right way.
+According to MDN docs, we must send 201 when a resource is created and send the newly created resource along with Response.
+But sometimes, we might be just updating quantity in our case.
+
+So we will use, CreatedAtRoute(location_To_Get_This_Rsource, resoure_Newly_Created) method
+Note: 
+    location: http://localhost:5000/api/Basket 
+    added in response header, as we specified the URL from where we can fetch the resource generated
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+Also, now if we lok at our Cookie.
+Currently we are testing on same domain, localhost:5000,
+hence we have no issue of CORS and we can easily pass cookie back and forth.
+
+But our React app, is on different domain. localhost:3000,
+In that case, we need to explicitly mention to allow passing of cookies across domains
+by adding AllowCredentials() method in UseCors() middleware.
+

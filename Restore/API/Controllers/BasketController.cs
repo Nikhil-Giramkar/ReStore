@@ -23,31 +23,18 @@ namespace API.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetBasket")]
         public async Task<ActionResult<BasketDTO>> GetBasket()
         {
             Basket basket = await RetrieveBasket();
             if (basket == null)
                 return NotFound();
 
-            return new BasketDTO
-            {
-                Id = basket.Id,
-                BuyerId = basket.BuyerId,
-                Items = basket.Items.Select(item => new BasketItemDTO{
-                    ProductId = item.ProductId,
-                    Name = item.Product.Name,
-                    Price = item.Product.Price,
-                    PictureUrl = item.Product.PictureUrl,
-                    Brand = item.Product.Brand,
-                    Type = item.Product.Type,
-                    Quantity = item.Quantity,
-                }).ToList()
-            };
+            return MapBasketToBasketDTO(basket);
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddItemToBasket(int productId, int quantity)
+        public async Task<ActionResult<BasketDTO>> AddItemToBasket(int productId, int quantity)
         {
             //get basket
             var basket = await RetrieveBasket();
@@ -70,10 +57,12 @@ namespace API.Controllers
             var result = await _context.SaveChangesAsync() > 0;
 
             if(result) 
-                return StatusCode(201);
+                return CreatedAtRoute("GetBasket", MapBasketToBasketDTO(basket));
+                //Here, we will now return the BasketDTO as response
+                //GetBasket will ocation headers correctly, specifying where to get this returned resource from
             
             return BadRequest(new ProblemDetails{
-                Title = "Prblem in saving product to basket"
+                Title = "Problem in saving product to basket"
             });
 
         }
@@ -135,5 +124,23 @@ namespace API.Controllers
             return basket;
         }
 
+        private BasketDTO MapBasketToBasketDTO(Basket basket)
+        {
+            return new BasketDTO
+            {
+                Id = basket.Id,
+                BuyerId = basket.BuyerId,
+                Items = basket.Items.Select(item => new BasketItemDTO
+                {
+                    ProductId = item.ProductId,
+                    Name = item.Product.Name,
+                    Price = item.Product.Price,
+                    PictureUrl = item.Product.PictureUrl,
+                    Brand = item.Product.Brand,
+                    Type = item.Product.Type,
+                    Quantity = item.Quantity,
+                }).ToList()
+            };
+        }
     }
 }
