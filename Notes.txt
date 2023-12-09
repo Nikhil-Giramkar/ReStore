@@ -732,4 +732,17 @@ hence we have no issue of CORS and we can easily pass cookie back and forth.
 But our React app, is on different domain. localhost:3000,
 In that case, we need to explicitly mention to allow passing of cookies across domains
 by adding AllowCredentials() method in UseCors() middleware.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+On Client Side, 
+we will add the API calls for axios in agent.ts and export them.
+Go to ProductCard file and create a handleAddItem() function to give call to addItem
+Also set loading till we add in the item.
+
+Not to set loading button from material-ui, we need to use it, from its lab,
+for that go to CLI
+    npm install @mui/lab @mui/material
+
+Now before testing, the add functionality, make sure to delete the cookie.
+
 

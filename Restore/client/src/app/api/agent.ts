@@ -4,6 +4,8 @@ import { router } from "../router/Routes";
 
 axios.defaults.baseURL = "http://localhost:5000/api/"
 
+axios.defaults.withCredentials = true; //allow passing of cookies
+
 const responseBody = (response : AxiosResponse) => response.data;
 
 const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
@@ -47,7 +49,7 @@ axios.interceptors.response.use(async response =>{
         default:
             break;
     }
-    return Promise.reject(error.response) //This helps in directly conse logging error istead of error.response
+    return Promise.reject(error.response) //This helps in directly console logging error instead of using error.response
 })
 
 const requests = {
@@ -70,9 +72,19 @@ const TestErrors = {
     getValidationError: () => requests.get('buggy/validation-error')
 }
 
+const Basket = {
+    get: () => requests.get('basket'),
+    addItem: (productId: number, quantity = 1) => requests.post(`basket?productId=${productId}&quantity=${quantity}`
+                                                                ,{}), //we need to send request body, since we will use query strings, request body will be empty
+    removeItem: (productId:number, quantity = 1) => requests.delete(`basket?productId=${productId}&quantity=${quantity}`)
+    
+    //Added quantity=1 as default value, it can obviously be overridden
+}
+
 const agent = {
     Catalog,
-    TestErrors
+    TestErrors,
+    Basket
 }
 
 export default agent;

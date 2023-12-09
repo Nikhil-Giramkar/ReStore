@@ -29,7 +29,7 @@ namespace API.Controllers
 
         [HttpGet("server-error")]
         public IActionResult GetServerError(){
-            throw new Exception("This is a Server Error");
+            throw new Exception("This is a Server Error"); //This will be caught by exception middleware
         }
 
 
