@@ -1,9 +1,11 @@
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Grid } from "@mui/material";
 import { Add, Delete, Remove } from "@mui/icons-material";
 import { useStoreContext } from "../../app/context/StoreContext";
 import { useState } from "react";
 import agent from "../../app/api/agent";
 import { LoadingButton } from "@mui/lab";
+import BasketSummary from "./BasketSummary";
+import { currencyFormat } from "../../app/util/util";
 
 export default function BasketPage() {
 
@@ -73,7 +75,7 @@ export default function BasketPage() {
                     <span>{item.name}</span>
                   </Box>
                 </TableCell>
-                <TableCell align="right">Rs.{(item.price / 100).toFixed(2)}</TableCell>
+                <TableCell align="right">{currencyFormat(item.price)}</TableCell>
                 <TableCell align="center">
 
                   <LoadingButton
@@ -93,7 +95,7 @@ export default function BasketPage() {
                   </LoadingButton>
 
                 </TableCell>
-                <TableCell align="right">Rs.{((item.price * item.quantity) / 100).toFixed(2)}</TableCell>
+                <TableCell align="right">{currencyFormat(item.price * item.quantity)}</TableCell>
                 <TableCell align="right">
                   <LoadingButton loading={status.loading && status.name === 'del' + item.productId}
                     color="error"
@@ -106,6 +108,15 @@ export default function BasketPage() {
           </TableBody>
         </Table>
       </TableContainer>
+
+
+      <Grid container>
+        <Grid item xs={6} />
+        <Grid item xs={6}>
+          <BasketSummary />
+        </Grid>
+      </Grid>
+
     </>
   )
 }
