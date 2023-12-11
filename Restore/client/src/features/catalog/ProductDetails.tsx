@@ -1,5 +1,5 @@
 import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Product } from "../../app/models/Product";
 import agent from "../../app/api/agent";
@@ -11,7 +11,7 @@ import { LoadingButton } from "@mui/lab";
 export default function ProductDetails() {
     //debugger;
 
-    const { basket } = useStoreContext();
+    const { basket, setBasket, removeItem } = useStoreContext();
 
     const { id } = useParams<{ id: string }>();
 
@@ -36,6 +36,33 @@ export default function ProductDetails() {
 
     }, [id, item])//Everytime the id changes, fetch the data again
 
+
+    function handleInputChange(event: ChangeEvent<HTMLInputElement>){
+        if(parseInt(event.currentTarget.value) >= 0){
+            setQuantity(parseInt(event.currentTarget.value));
+        }
+        
+    }
+
+    function handleUpdateCart(){
+        if(!product) return 
+
+        setSubmitting(true);
+        if(!item || quantity > item.quantity){
+            const updatedQuantity = item ? quantity - item.quantity : quantity;
+            agent.Basket.addItem(product.id, updatedQuantity)
+            .then(basket => setBasket(basket))
+            .catch(error => console.log(error))
+            .finally(()=> setSubmitting(false))
+        }
+        else{
+            const updatedQuantity = item ? item.quantity - quantity : quantity;
+            agent.Basket.removeItem(product.id, updatedQuantity)
+            .then(()=> removeItem(product.id, updatedQuantity))
+            .catch(error => console.log(error))
+            .finally(()=> setSubmitting(false))
+        }
+    }
     if (loading) return <LoadingComponent message="Loading Product..." />
 
     if (!product) return <NotFound />
@@ -88,6 +115,7 @@ export default function ProductDetails() {
                     <Grid container spacing={2}>
                         <Grid item xs={6}>
                             <TextField
+                            onChange={handleInputChange}
                                 variant="outlined"
                                 type="number"
                                 label='Quntity in cart'
@@ -98,6 +126,9 @@ export default function ProductDetails() {
 
                         <Grid item xs={6}>
                             <LoadingButton
+                                disabled = {item?.quantity === quantity || !item && quantity === 0} // disable if nothing changed
+                                loading={submitting}
+                                onClick={handleUpdateCart}
                                 sx={{ height: '55px' }}
                                 color="primary"
                                 size="large"
