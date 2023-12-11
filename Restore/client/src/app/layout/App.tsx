@@ -40,6 +40,9 @@ function App() {
                   .catch(error => console.log(error))
                   .finally(()=> setLoading(false))
     }
+    else{
+      setLoading(false) //Even if I donot have buyerId, no need to keep loading
+    }
   }, [setBasket]) //as soon as basket value changes, fetch the data again from backend
 
   if(loading){
