@@ -1,11 +1,12 @@
 import { Button, ButtonGroup, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { CounterState, DECREMENET_COUNTER, INCREMENET_COUNTER } from "./counterReducer";
+import { CounterState, decrement, increment } from "./counterReducer";
 
 export default function ContactPage(){
 
     const dispatch = useDispatch(); //Used to dispatch actions
-    const {data, title} = useSelector((state : CounterState) => state); //useSelector listens to the state and updates them, wherever used (Like event handling in C#)
+    const data = useSelector((state : CounterState) => state.data); //useSelector listens to the state and updates them, wherever used (Like event handling in C#)
+    const title = useSelector((state : CounterState) => state.title);
     //Whenever, data or title is updated in store, it is listened here, React re-renders this component.
     
     return (
@@ -19,8 +20,10 @@ export default function ContactPage(){
         </Typography>
 
         <ButtonGroup>
-            <Button variant="contained" color="error" onClick={() => dispatch({type: DECREMENET_COUNTER})}>Decrement</Button>
-            <Button variant="contained" color="primary" onClick={() => dispatch({type: INCREMENET_COUNTER})}>Increment</Button>
+            <Button variant="contained" color="warning" onClick={() => dispatch(decrement(5))}>Decrement by 5</Button>
+            <Button variant="contained" color="error" onClick={() => dispatch(decrement())}>Decrement</Button>
+            <Button variant="contained" color="primary" onClick={() => dispatch(increment())}>Increment</Button>
+            <Button variant="contained" color="secondary" onClick={() => dispatch(increment(5))}>Increment by 5</Button>
         </ButtonGroup>
         </>
     )
