@@ -824,3 +824,5 @@ We had to write a lot of boilerplate code, to do a small thing.
 
 Hence to reduce this effor, we will use Redux - Toolkit, go to CLI in client folder.
     npm install @reduxjs/toolkit
+
+Redux DevTools is a Chrome Extension that helps in debugging Redux code.
