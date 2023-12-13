@@ -773,3 +773,48 @@ Anything mentioned in Context API can be accessed globally, by any component.
 In Context API, we store states, functions to make accessible globally.
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------
+                                            SECTION 6 - Redux
+---------------------------------------------------------------------------------------------------------------------------------------------
+Redux: 
+    Javascript library that provides state mangement for our application.
+    Its for any type of Application, React, Angular, Vue
+    React-Redux - allows us to integrate Redux in our app easily and manage states in our app.
+    Redux-Toolkit - To help us write redux code.
+    Redux-DevTools - for troubleshooting problems in app.
+
+Redux-Store
+    Redux is like store for our app, which stores states for our app in a centralized location.
+    We can have, one store per app.
+    Each store contains many reducers or slices of state.
+
+When we use Redux, we will create a Provider.
+Which provides states of our application, similar to useContext() but more powerful.
+
+Flow of Redux:
+        1.Store - ontains all states at central place.
+        2.Provider - we provide all states in store, to Reduc-Provider.
+        3.App - The provider provides the states to entire app.
+        4. Components - From app, those states can be passed down to all components.
+        5. Actions - Whenever a component wants to change any state, it uses something called Actions.
+        6. Reducers - Reducer function are responsible to change states in store depending on action coming as input and current state.
+        8. Store - When state updated in app, step 1 to 7 is again follwed to notify the updation of state.
+
+Redux Bes Practices
+1. Do not mutate states inside Redux Store.
+   We should create a new state and replace that with existing state.
+
+2. Reducers must not have side effects - they should not go and fetch data from somewhere.
+
+3. Do not have non-serialaizable values in States or Actions - not to use class instances or funtions in states.
+
+4. Only 1 store per app.
+
+Redux Toolkit helps to stick to these best practices.
+It has good defaults for store setup.
+It has most common built-ins.
+Less boilerplate code.
+
+
+To use Redux, go to CLI in client folder
+    npm install redux react-redux
