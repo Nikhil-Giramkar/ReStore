@@ -5,10 +5,12 @@ import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 //Add css for toast notification
 import 'react-toastify/ReactToastify.css'
-import { useStoreContext } from "../context/StoreContext";
+// import { useStoreContext } from "../context/StoreContext";
 import { getCookie } from "../util/util";
 import agent from "../api/agent";
 import LoadingComponent from "./LoadingComponent";
+import { useAppDispactch } from "../store/configureStore";
+import { setBasket } from "../../features/basket/basketSlice";
 
 function App() {
 
@@ -29,21 +31,22 @@ function App() {
     setDarkMode(!darkMode);
   }
 
-  const {setBasket} = useStoreContext(); 
+  //const {setBasket} = useStoreContext(); 
+  const dispatch = useAppDispactch();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const buyerId = getCookie('buyerId');
     if(buyerId) {
       agent.Basket.get()
-                  .then(basket => setBasket(basket))
+                  .then(basket => dispatch(setBasket(basket)))
                   .catch(error => console.log(error))
                   .finally(()=> setLoading(false))
     }
     else{
       setLoading(false) //Even if I donot have buyerId, no need to keep loading
     }
-  }, [setBasket]) //as soon as basket value changes, fetch the data again from backend
+  }, [dispatch]) //as soon as basket value changes, fetch the data again from backend
 
   if(loading){
     return <LoadingComponent message="Initialising App..."/>

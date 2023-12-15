@@ -826,3 +826,14 @@ Hence to reduce this effor, we will use Redux - Toolkit, go to CLI in client fol
     npm install @reduxjs/toolkit
 
 Redux DevTools is a Chrome Extension that helps in debugging Redux code.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Creating a basket slice/reducer
+--------------------------
+Added initialState
+Added reducers similar to StoreConext
+exported actions.
+
+Replaced StreContext with basketSlice everywhere.
+
+

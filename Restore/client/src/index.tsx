@@ -13,13 +13,9 @@ import { store } from './app/store/configureStore.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <StoreProvider>
       <Provider store={store}>
         <RouterProvider router={router} />
         {/* The above code will load <App /> component */}
       </Provider>
-
-    </StoreProvider>
-
   </React.StrictMode>,
 )
