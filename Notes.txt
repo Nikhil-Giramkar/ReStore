@@ -841,5 +841,11 @@ At this point, we will centralize all the Api calls made to set and remove baske
 Using Redux's createThunkAsync method.
 And remove all repeated code from every page.
 
+Now when we click on Add To Cart on any item
+All "Add To Cart" buttons for all cards are going in loading state.
+To solve this, we can add a productId in from of pending statusWhich will specify, exactly which 
+Add To Cart / Product is in pending state before being added to basket.
+And depending on this productId, we can add loadingbutton true to that specific product.
+
 
 
