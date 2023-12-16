@@ -847,5 +847,9 @@ To solve this, we can add a productId in from of pending statusWhich will specif
 Add To Cart / Product is in pending state before being added to basket.
 And depending on this productId, we can add loadingbutton true to that specific product.
 
+Creating a removeItem centralized call using thunk.
+Adding return type as void, since, we do not get anything from backend, when we remove an item.
+Use RemoveItem in all places and centralize the api call
+
 
 
