@@ -835,5 +835,11 @@ Added reducers similar to StoreConext
 exported actions.
 
 Replaced StreContext with basketSlice everywhere.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+At this point, we will centralize all the Api calls made to set and remove basket items at one plce.
+Using Redux's createThunkAsync method.
+And remove all repeated code from every page.
+
 
 
