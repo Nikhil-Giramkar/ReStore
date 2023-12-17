@@ -907,3 +907,6 @@ Ex:
       FROM "Products" AS "p"
       WHERE (@__lowerCaseSearchTerm_0 = '' OR instr(lower("p"."Name"), @__lowerCaseSearchTerm_0) > 0) AND lower("p"."Brand") IN ('angular', 'react') AND lower("p"."Type") = 'gloves'
       ORDER BY "p"."Price" DESC
+
+At this point, we added Pagination
+And created classes to provide all pagination info to user.
