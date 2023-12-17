@@ -31,5 +31,30 @@ namespace API.Extensions
 
             return query.Where(p => p.Name.ToLower().Contains(lowerCaseSearchTerm));
         }
+
+        public static IQueryable<Product> Filter(this IQueryable<Product> query, string brands, string types)
+        {
+            var brandList = new List<string>();
+            var typeList = new List<string>();
+
+            if(!string.IsNullOrEmpty(brands))
+                brandList.AddRange(brands.ToLower().Split(",").ToList());
+                //Add all brands as list split by comma and converted to lower case
+
+            if(!string.IsNullOrEmpty(types))
+                typeList.AddRange(types.ToLower().Split(",").ToList());
+
+
+            query = query.Where(p => brandList.Count == 0 || brandList.Contains(p.Brand.ToLower()));
+            query = query.Where(p => typeList.Count == 0 || typeList.Contains(p.Type.ToLower()));
+            
+            //If brandlist or typelist are empty, do not perform any action
+            //If count==0, second statement after || will not be evaluated, since if first stmt is True in case of OR
+            //Second stmt is ignored
+            //if first stmt is false, then second stmt of OR goes for evaluation
+            
+            return query;
+
+        }
     }
 }

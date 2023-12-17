@@ -893,3 +893,10 @@ If you returned an IEnumerable, your code would retrieve all values of one table
 At this point, we create a custom Search method to search in Product Names
 Based on search term.
 So now, we ca sor and search together, check on swagger.
+
+At this point, we added Filter method To filter products based on 
+multiple brands and types seperated in comma seperated values.
+If our brands or types do not match, we return an empty list
+
+Now we can do Sort(), Search(), Filter() all at once.
+Check on Swagger.
