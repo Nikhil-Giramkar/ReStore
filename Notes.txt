@@ -889,3 +889,7 @@ The data is never retrieved from the source until you evaluate it, by turning it
 The advantage of returning an IQueryable from your repository is that 
 your calling code can specify additional .Where clauses BEFORE the query goes to the database. 
 If you returned an IEnumerable, your code would retrieve all values of one table from the database, and then perform filtering in memory, which is inefficient.
+
+At this point, we create a custom Search method to search in Product Names
+Based on search term.
+So now, we ca sor and search together, check on swagger.
