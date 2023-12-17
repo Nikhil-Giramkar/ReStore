@@ -865,6 +865,27 @@ We will fetch that product from backend, only if necessary.
 Performed error handling, using thunkAPI
 and return error.data in catch block in catalog.slice.
 
-Also ficed the loading button issue in ProductDetailsPage
+Also fixed the loading button issue in ProductDetailsPage
 
+Read again about useContext and Redux, Thunk, etc.
 
+---------------------------------------------------------------------------------------------------------------------------------------------
+                                        SECTION 7 - Paging, Sorting, Searching, Filtering
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+First, 
+we created an extensions folder in API folder.
+Here, we wrote our custom Sort( ) method for IQueryable<Products> 
+where, we fetch the poducts from DB with ORDER BY clause.
+ORDER BY
+    Name (default)
+    Price
+    Price Descending
+
+An IQueryable is not actually a collection of entities, 
+rather it describes how to obtain that collection. 
+The data is never retrieved from the source until you evaluate it, by turning it into an IEnumerable or IList.
+
+The advantage of returning an IQueryable from your repository is that 
+your calling code can specify additional .Where clauses BEFORE the query goes to the database. 
+If you returned an IEnumerable, your code would retrieve all values of one table from the database, and then perform filtering in memory, which is inefficient.
