@@ -851,5 +851,20 @@ Creating a removeItem centralized call using thunk.
 Adding return type as void, since, we do not get anything from backend, when we remove an item.
 Use RemoveItem in all places and centralize the api call
 
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Createed a fetchProductAsync and fetchProductsAsync
+To centralise the cll of fetching product from API.
+We also avoided fetching product from backend, by using Entity Adapters.
+So that, when app is loaded,
+Our Products array is filled (productsAdapter)
+
+So after that, when we View any product, we do not see loading symbol, since we fetched it from productAdapters.
+We will fetch that product from backend, only if necessary.
+
+Performed error handling, using thunkAPI
+and return error.data in catch block in catalog.slice.
+
+Also ficed the loading button issue in ProductDetailsPage
 
 

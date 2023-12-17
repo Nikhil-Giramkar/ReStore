@@ -1,14 +1,12 @@
 import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Product } from "../../app/models/Product";
-import agent from "../../app/api/agent";
-import NotFound from "../../app/errors/NotFound";
-import LoadingComponent from "../../app/layout/LoadingComponent";
-// import { useStoreContext } from "../../app/context/StoreContext";
 import { LoadingButton } from "@mui/lab";
 import { useAppDispactch, useAppSelector } from "../../app/store/configureStore";
 import { addBasketItemAsync, removeBasketItemAsync } from "../basket/basketSlice";
+import { fetchProductAsync, productSelectors } from "./catalogSlice";
+import NotFound from "../../app/errors/NotFound";
+import LoadingComponent from "../../app/layout/LoadingComponent";
 
 export default function ProductDetails() {
     //debugger;
@@ -19,10 +17,9 @@ export default function ProductDetails() {
 
     const { id } = useParams<{ id: string }>();
 
-    const [product, setProduct] = useState<Product | null>(null);
-    //We may or may not receive a product from backend hence default value and type is null
+    const product = useAppSelector(state => productSelectors.selectById(state, parseInt(id!)));
 
-    const [loading, setLoading] = useState(true); //Loading flag to show that we are fetching data
+    const {status: productStatus} = useAppSelector(state => state.catalog);
 
     const [quantity, setQuantity] = useState(0);
 
@@ -33,12 +30,11 @@ export default function ProductDetails() {
         if (item)
             setQuantity(item.quantity);
 
-        id && agent.Catalog.details(parseInt(id)).
-            then(product => setProduct(product))
-            .catch(error => console.log(error))
-            .finally(() => setLoading(false)) //Set Loading flag false
+        if(!product && id) { //if product not available in productAdapters list, fetch from backend
+            dispatch(fetchProductAsync(parseInt(id)));
+        }
 
-    }, [id, item])//Everytime the id changes, fetch the data again
+    }, [product, dispatch, item, id])//Everytime the id changes, fetch the data again
 
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>){
@@ -61,7 +57,7 @@ export default function ProductDetails() {
             dispatch(removeBasketItemAsync({productId: product.id, quantity: updatedQuantity}))
         }
     }
-    if (loading) return <LoadingComponent message="Loading Product..." />
+    if (productStatus.includes('pending')) return <LoadingComponent message="Loading Product..." />
 
     if (!product) return <NotFound />
 
@@ -125,7 +121,7 @@ export default function ProductDetails() {
                         <Grid item xs={6}>
                             <LoadingButton
                                 disabled = {item?.quantity === quantity || !item && quantity === 0} // disable if nothing changed
-                                loading={status.includes('pendingRemoveItem' + item?.productId)}
+                                loading={status.includes('pending')}
                                 onClick={handleUpdateCart}
                                 sx={{ height: '55px' }}
                                 color="primary"
