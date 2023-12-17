@@ -24,9 +24,9 @@ export const addBasketItemAsync = createAsyncThunk<Basket, {productId: number, q
     }
 )
 
-export const removeBasketItemAsync = createAsyncThunk<void, {productId: number, quantity?: number}>(
+export const removeBasketItemAsync = createAsyncThunk<void, {productId: number, quantity: number, name? : string}>(
     'basket/removeBasketItemAsync',
-    async ({productId, quantity = 1})=> {
+    async ({productId, quantity})=> {
         try{
             return await agent.Basket.removeItem(productId, quantity);
         }
@@ -75,7 +75,7 @@ export const basketSlice = createSlice({
         });
 
         builder.addCase(removeBasketItemAsync.pending, (state, action) => {
-            state.status = 'pendingRemoveItem' + action.meta.arg.productId;
+            state.status = 'pendingRemoveItem' + action.meta.arg.productId + action.meta.arg.name;
         });
 
         builder.addCase(removeBasketItemAsync.fulfilled, (state, action) => {
@@ -86,7 +86,7 @@ export const basketSlice = createSlice({
                 return;
             }
 
-            state.basket!.items[itemIndex].quantity -= quantity!;
+            state.basket!.items[itemIndex].quantity -= quantity;
             if(state.basket?.items[itemIndex].quantity === 0){
                 state.basket.items.splice(itemIndex, 1);
             }
