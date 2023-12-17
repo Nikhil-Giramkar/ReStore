@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
@@ -47,7 +48,7 @@ namespace API.Controllers
             //get product
             var product = await _context.Products.FindAsync(productId);
             if(product == null)
-                return NotFound();
+                return BadRequest(new ProblemDetails{Title = "Product Not Found"});
 
             //add item
             basket.AddItem(product, quantity);
