@@ -900,3 +900,10 @@ If our brands or types do not match, we return an empty list
 
 Now we can do Sort(), Search(), Filter() all at once.
 Check on Swagger.
+
+This is how query is created 
+Ex:
+    SELECT "p"."Id", "p"."Brand", "p"."Description", "p"."Name", "p"."PictureUrl", "p"."Price", "p"."QuantityInStock", "p"."Type"
+      FROM "Products" AS "p"
+      WHERE (@__lowerCaseSearchTerm_0 = '' OR instr(lower("p"."Name"), @__lowerCaseSearchTerm_0) > 0) AND lower("p"."Brand") IN ('angular', 'react') AND lower("p"."Type") = 'gloves'
+      ORDER BY "p"."Price" DESC
