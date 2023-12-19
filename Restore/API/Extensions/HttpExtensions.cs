@@ -1,0 +1,23 @@
+
+using System.Text.Json;
+using API.RequestHelpers;
+
+namespace API.Extensions
+{
+    public static class HttpExtensions
+    {
+        public static void AddPaginationHeader(this HttpResponse response, MetaData metaData)
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+
+            response.Headers.Add("Pagination", JsonSerializer.Serialize(metaData, options));
+
+            response.Headers.Append("Access-Control-Expose-Headers", "Pagination");
+            //We need to appen above key-value so that pagination data is available to client (frontend)
+            //Added due to CORS
+        }
+    }
+}
