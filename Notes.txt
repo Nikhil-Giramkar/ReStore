@@ -910,3 +910,8 @@ Ex:
 
 At this point, we added Pagination
 And created classes to provide all pagination info to user.
+
+Added Pagination Logic in previous commit.
+Here, just by adding [FromQuery] Annotation,
+.NET understands, to search inside query string
+for the properties of object passed as argument to given function. 
