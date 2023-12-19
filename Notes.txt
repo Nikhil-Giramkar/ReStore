@@ -914,4 +914,11 @@ And created classes to provide all pagination info to user.
 Added Pagination Logic in previous commit.
 Here, just by adding [FromQuery] Annotation,
 .NET understands, to search inside query string
-for the properties of object passed as argument to given function. 
+for the properties of object passed as argument to given function.
+ ---------------------------------------------------------------------------------------------------------------------------------------------
+
+Fetch brands and types in FrontEnd.
+create a different useEffect for filterLoaded flag
+Brcause, if we add in productLoaded and filtersLoaded in same useEffect
+& if products are not loade before filters, we are giving multiple calss to backend, until both flags true.
+

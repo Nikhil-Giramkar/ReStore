@@ -11,7 +11,7 @@ export default function ProductList({ products }: Props) {
         <>
             <Grid container spacing={4}> 
                 {products.map((product) => ( //Map function to add li tag to each item
-                    <Grid item xs={3}  // Out of 12 columns of grid, one item will take 3, so total 4 cards in one row
+                    <Grid item xs={4}  // Out of 12 columns of grid, one item will take 3, so total 4 cards in one row
                         key={product.id}>
                         <ProductCard product={product} />
                     </Grid>
