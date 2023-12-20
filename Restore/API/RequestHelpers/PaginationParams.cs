@@ -6,7 +6,7 @@ namespace API.RequestHelpers
 
         public int PageNumber { get; set; } = 1; //default value
 
-        private int _pageSize = 6; //By default 6 products will be shown at once
+        private int _pageSize = 6; //By default 6 products will be shown at once, it can be overrden, when set from Frontend
         public int PageSize
         {
             get { return _pageSize; }

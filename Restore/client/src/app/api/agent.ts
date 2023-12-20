@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import {toast} from 'react-toastify'
 import { router } from "../router/Routes";
+import { PaginatedResponse } from "../models/Pagination";
 
 axios.defaults.baseURL = "http://localhost:5000/api/"
 
@@ -15,8 +16,12 @@ const sleep = () => new Promise(resolve => setTimeout(resolve, 500));
 axios.interceptors.response.use(async response =>{
     await sleep(); //Adding a fake delay to look realistic
 
-    return response; // return the response if promise fulfilled
-
+    const pagination = response.headers['pagination'];
+    if (pagination) {
+        response.data = new PaginatedResponse(response.data, JSON.parse(pagination));
+    }
+    return response;
+    
 }, (error: AxiosError) =>{
     
     const {data, status} = error.response as AxiosResponse;
