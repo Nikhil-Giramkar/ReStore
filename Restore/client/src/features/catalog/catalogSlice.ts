@@ -17,6 +17,7 @@ interface CatalogState {
 
 function getAxiosParams(productParams: ProductParams) {
     const params = new URLSearchParams();
+    //The name of key should match the argument in Backend Code
     params.append('pageNumber', productParams.pageNumber.toString());
     params.append('pageSize', productParams.pageSize.toString());
     params.append('orderBy', productParams.orderBy);
