@@ -922,3 +922,6 @@ create a different useEffect for filterLoaded flag
 Brcause, if we add in productLoaded and filtersLoaded in same useEffect
 & if products are not loade before filters, we are giving multiple calss to backend, until both flags true.
 
+
+At this point, we created an interface for productParams
+And created reducers to set new state and reset to initial state.
