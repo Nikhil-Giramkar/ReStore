@@ -89,7 +89,7 @@ export const catalogSlice = createSlice({
     }),
     reducers: {
         setProductParams: (state, action) => {
-            state.productsLoaded = false,
+            state.productsLoaded = false, //This will force the useEffect in catalogSlice to fetch products again as per changed params
                 state.productParams = {
                     ...state.productParams,
                     ...action.payload
