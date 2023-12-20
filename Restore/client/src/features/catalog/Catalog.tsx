@@ -3,9 +3,10 @@ import ProductList from "./ProductList";
 
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useAppDispactch, useAppSelector } from "../../app/store/configureStore";
-import { fetchFilters, fetchProductsAsync, productSelectors } from "./catalogSlice";
-import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Pagination, Paper, Radio, RadioGroup, Typography } from "@mui/material";
+import { fetchFilters, fetchProductsAsync, productSelectors, setProductParams } from "./catalogSlice";
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Pagination, Paper, Typography } from "@mui/material";
 import ProductSearch from "./ProductSearch";
+import RadioButtonGroup from "../../app/components/RadioButtonGroup";
 
 export function Catalog() {
 
@@ -16,7 +17,7 @@ export function Catalog() {
     ]
     //Initializing products state, with an array of objects
     const products = useAppSelector(productSelectors.selectAll);
-    const { productsLoaded, status, filtersLoaded, brands, types } = useAppSelector(state => state.catalog);
+    const { productsLoaded, status, filtersLoaded, brands, types, productParams } = useAppSelector(state => state.catalog);
     const dispatch = useAppDispactch();
 
     useEffect(() => {
@@ -43,11 +44,11 @@ export function Catalog() {
                     </Paper>
                     <Paper sx={{ mb: 2, p: 2 }}>
                         <FormControl component="fieldset">
-                            <RadioGroup>
-                                {sortOptions.map(({ value, label }) => (
-                                    <FormControlLabel value={value} control={<Radio />} label={label} />
-                                ))}
-                            </RadioGroup>
+                           <RadioButtonGroup 
+                                selectedValue={productParams.orderBy}
+                                options={sortOptions}
+                                onChange={(e) => dispatch(setProductParams({orderBy: e.target.value}))}
+                            />
                         </FormControl>
                     </Paper>
 
