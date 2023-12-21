@@ -943,3 +943,9 @@ A membership system for .NET that includes:
     Claims management
 
 Can use external providers also. - Google. FB, etc.
+
+Go to Nuget Gallery -> install  
+    Microsoft.AspNetCore.Authentication.JwtBearer 
+    Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+Create a new Entity for our User
