@@ -930,3 +930,6 @@ At this point,
 in agent.ts, we modified out GET requests to carry an optional URLSearchParams object
 Which can pass any parameters to backend.
 Sgape the ProductParams to URLSearchParams and send it along with request.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
