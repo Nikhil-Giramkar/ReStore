@@ -3,11 +3,12 @@ import ProductList from "./ProductList";
 
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useAppDispactch, useAppSelector } from "../../app/store/configureStore";
-import { fetchFilters, fetchProductsAsync, productSelectors, setProductParams } from "./catalogSlice";
-import { Box, FormControl, Grid, Pagination, Paper, Typography } from "@mui/material";
+import { fetchFilters, fetchProductsAsync, productSelectors, setPageNumber, setProductParams } from "./catalogSlice";
+import { FormControl, Grid, Paper } from "@mui/material";
 import ProductSearch from "./ProductSearch";
 import RadioButtonGroup from "../../app/components/RadioButtonGroup";
 import CheckboxButtons from "../../app/components/CheckboxButtons";
+import AppPagination from "../../app/components/AppPagination";
 
 export function Catalog() {
 
@@ -18,7 +19,7 @@ export function Catalog() {
     ]
     //Initializing products state, with an array of objects
     const products = useAppSelector(productSelectors.selectAll);
-    const { productsLoaded, status, filtersLoaded, brands, types, productParams } = useAppSelector(state => state.catalog);
+    const { productsLoaded, status, filtersLoaded, brands, types, productParams, metaData } = useAppSelector(state => state.catalog);
     const dispatch = useAppDispactch();
 
     useEffect(() => {
@@ -35,10 +36,10 @@ export function Catalog() {
 
 
 
-    if (status.includes('pending')) return <LoadingComponent message="Loading Catalog..." />
+    if (status.includes('pending') || !metaData) return <LoadingComponent message="Loading Catalog..." />
     return (
         <>
-            <Grid container spacing={4}>
+            <Grid container columnSpacing={4}>
                 <Grid item xs={3}>
                     <Paper sx={{ mb: 3 }}>
                         <ProductSearch />
@@ -76,18 +77,11 @@ export function Catalog() {
 
                 <Grid item xs={3}>
                 </Grid>
-                <Grid item xs={9}>
-                    <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Typography>
-                            Displaying 1 to 6 of 20 items
-                        </Typography>
-                        <Pagination
-                            color="secondary"
-                            size="large"
-                            count={4}
-                            page={2}
-                        />
-                    </Box>
+                <Grid item xs={9} sx={{mb: 2}}>
+                    <AppPagination 
+                        metaData={metaData}
+                        onPageChange={(page: number) => dispatch(setPageNumber({pageNumber: page}))}
+                    />
                 </Grid>
             </Grid>
 
