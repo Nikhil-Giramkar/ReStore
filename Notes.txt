@@ -931,5 +931,15 @@ in agent.ts, we modified out GET requests to carry an optional URLSearchParams o
 Which can pass any parameters to backend.
 Sgape the ProductParams to URLSearchParams and send it along with request.
 ---------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------
+                                                SECTION 8 - Identity
+---------------------------------------------------------------------------------------------------------------------------------------------
 
+ASP.NET Identity - 
+A membership system for .NET that includes:
+    Password Hashing
+    Password Validation
+    User Storage
+    Claims management
 
+Can use external providers also. - Google. FB, etc.
