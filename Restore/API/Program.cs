@@ -1,5 +1,7 @@
 using API.Data;
+using API.Entities;
 using API.Middleware;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,14 @@ builder.Services.AddDbContext<StoreContext>(options => {
 });
 
 builder.Services.AddCors();
+
+builder.Services.AddIdentityCore<User>()
+        .AddRoles<IdentityRole>()
+        .AddEntityFrameworkStores<StoreContext>(); //This adds a few tables in DB related to identity (around 6)
+
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
+
 
 var app = builder.Build();
 
@@ -52,10 +62,11 @@ app.MapControllers(); //For mapping request to correct controller
 
 var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<StoreContext>();
+var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 try{
-    context.Database.Migrate();
-    DbInitializer.Initialize(context);
+    await context.Database.MigrateAsync();
+    await DbInitializer.Initialize(context, userManager);
 }
 catch(Exception ex){
     logger.LogError(ex, "A problem occurred during migration");

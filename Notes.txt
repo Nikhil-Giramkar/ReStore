@@ -948,4 +948,11 @@ Go to Nuget Gallery -> install
     Microsoft.AspNetCore.Authentication.JwtBearer 
     Microsoft.AspNetCore.Identity.EntityFrameworkCore
 
-Create a new Entity for our User
+Create a new Entity for our User, extend it from IdentityUser class provided by ASP.NET Identity.
+Add services in Program.cs as written
+Add default users in DbInitializer
+Add types of roles in StoreContext (refer previous commit)
+
+Then add the migration to generate tables automatically for User class
+    dotnet ef migrations add IdentityAdded
+
