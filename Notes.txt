@@ -962,4 +962,76 @@ If I register a user with new username and password,
 But with an email address that is already taken, we are still able to create a user
 So to avoid duplicate emails
 Configure options in Program.cs
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+JWT Tokens
+(Json Web Tokens)
+
+What?
+---------
+In our backend, we are currently using APIs
+We know that APIs are stateless.
+They cannot remember anyhing about the request they just processed.
+
+Hence, our request should contain everything needed for processing request by API.
+
+If our API cannot remember whether we have logged in or not, because it is stateless,
+JWT solves that problem. 
+
+As we are going to send this token with our request to the API ad it solves the problem
+of our API needing to remember if user has logged in.
+
+If we did not use something like JWT, we would have required to pass username ad password with each request 
+and check for each request if user is authentic.
+
+JWT is self contained
+It can contain credentials, claims and other informations.
+It does not need to check with DB everytime if our user is authentic. (DB calls avoided)
+
+
+JWT structure
+----------------
+JWT structure is divided in 3 parts.
+2 of the parts are not encrypted, they are in clear text
+
+    1. Header portion
+        It describes what algorithm was used to encrypt the signature.
+    2. Payload
+        It conatins all the information we want to store in our token.
+        It contains Claims made by user, that they are an authentic user with certain Role.
+        Also contains expiry date of token.
+    3. signature
+        Encrypted part.
+        Our API server will not validated token if it cnnot verify the signature.
+        We have a secret key stored on our server and this secret key is used to sign the token.
+        When we receive the token from client, it uses the same secret key to decrypt the signature and validate if token is authentic.
+        From that point we can say, OK you are logged in and all claims made by you are correct.
+
+
+Authentication Workflow
+---------------------------
+
+            Client          Sends username + password               Server
+                    --------------------------------------------->
+                             
+                         Validates credentials, returns JWT 
+     (JWT received) <--------------------------------------------- (JWT generated)
+
+                        Sends JWT with future requests
+                    -----------------------------------------------> (JWT received)
+
+                        Server validates JWT and returns response
+                    <-----------------------------------------------
+
+Benefits of JWT
+-----------------
+1. Self contained - no session required to manage on server.
+    Means, users are not consuming memory on our server when interacting.
+
+2. Portable - single token can be used with multiple backends.
+
+3. Mobile friendly - no cookies required 
+    Mobile apps do not understand cookies, hence if we make Mobile version of our app, we can use JWT.
+
+4. Performance - No need to make DB request to validate user each time.
 
