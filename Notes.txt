@@ -1035,3 +1035,22 @@ Benefits of JWT
 
 4. Performance - No need to make DB request to validate user each time.
 
+Now create a TokenService Class
+Which generates a JWT token using all the above concepts.
+
+Use this Token Service in accounts Controller to generate token while returning User DTO
+
+Add the JWT Security Key inside appSettings.Development.json
+    this is a secret key and needs to be at least 64(!) characters
+    So gerate it from any webiste
+        https://1password.com/password-generator/
+
+Now when we test the Login endpoint
+With an already existing user, we receive a token.
+This JWT Token can be decoded at 
+    https://jwt.io/
+    Where in 
+    Header - we see the algo we used to sign the key.
+    Payload section - we get to know the 
+        claims made by user - name, email, roles
+        expiry Date
