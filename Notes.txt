@@ -956,3 +956,10 @@ Add types of roles in StoreContext (refer previous commit)
 Then add the migration to generate tables automatically for User class
     dotnet ef migrations add IdentityAdded
 
+
+When Testing Register endpoint we found that
+If I register a user with new username and password,
+But with an email address that is already taken, we are still able to create a user
+So to avoid duplicate emails
+Configure options in Program.cs
+

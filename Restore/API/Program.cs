@@ -21,7 +21,11 @@ builder.Services.AddDbContext<StoreContext>(options => {
 
 builder.Services.AddCors();
 
-builder.Services.AddIdentityCore<User>()
+builder.Services.AddIdentityCore<User>( opt =>
+    {
+        opt.User.RequireUniqueEmail = true;
+    }
+)
         .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<StoreContext>(); //This adds a few tables in DB related to identity (around 6)
 
