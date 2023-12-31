@@ -87,10 +87,17 @@ const Basket = {
     //Added quantity=1 as default value, it can obviously be overridden
 }
 
+const Account = {
+    login: (values: any) => requests.post("acount/login", values),
+    register: (values: any) => requests.post("account/register", values),
+    currentUser: () => requests.get("account/currentUser"),
+}
+
 const agent = {
     Catalog,
     TestErrors,
-    Basket
+    Basket,
+    Account
 }
 
 export default agent;
