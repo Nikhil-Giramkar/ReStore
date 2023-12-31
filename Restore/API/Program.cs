@@ -1,9 +1,12 @@
+using System.Text;
 using API.Data;
 using API.Entities;
 using API.Middleware;
 using API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +33,18 @@ builder.Services.AddIdentityCore<User>( opt =>
         .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<StoreContext>(); //This adds a few tables in DB related to identity (around 6)
 
-builder.Services.AddAuthentication();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt => {
+                    opt.TokenValidationParameters = new TokenValidationParameters{
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(builder.Configuration["JWTSettings:TokenKey"]))
+                    };
+                });
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<TokenService>(); //Keep this service alive till the lifetime of HTTP request.
@@ -61,6 +75,8 @@ app.UseCors(opt => {
     //AllowCredentials() will allow to pass cookies from 3000 to 5000 and vice versa
     //Only from localhost:3000 (our frontend app)
 });
+
+app.UseAuthentication();
 
 app.UseAuthorization(); //For Auth
 
