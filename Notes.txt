@@ -1070,3 +1070,8 @@ Write here
 Bearer and space is important here, and press Login.
 
 Now, when we try to execute GetCurrentUser endpoint, we get the see token back.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+here, we'll use React Hook Form to use forms hook in react.
+Install in client folder
+    npm install react-hook-form
