@@ -1054,3 +1054,19 @@ This JWT Token can be decoded at
     Payload section - we get to know the 
         claims made by user - name, email, roles
         expiry Date
+---------------------------------------------------------------------------------------------------------------------------------------------
+At hs point, configured Swagger to accept a JWT Token for Authorization.
+
+Wuth this code,
+Go to Swagger, we see a Authorize button on right top corner.
+
+First go to Login end point
+Put username and pasword of a valid user,
+We het a token with it.
+Copy that Token, go to Authorize button.
+Clck that and we see a textbox 
+Write here 
+        "Bearer ***Token Copied**"
+Bearer and space is important here, and press Login.
+
+Now, when we try to execute GetCurrentUser endpoint, we get the see token back.
