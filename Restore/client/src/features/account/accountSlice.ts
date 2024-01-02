@@ -3,6 +3,7 @@ import { User } from "../../app/models/User";
 import agent from "../../app/api/agent";
 import { FieldValues } from "react-hook-form";
 import { router } from "../../app/router/Routes";
+import { toast } from "react-toastify";
 
 interface AccountState{
     user: User | null;
@@ -70,11 +71,20 @@ export const accountSlice = createSlice({
         }
     },
     extraReducers: (builder => {
+        builder.addCase(fetchCurrentUser.rejected, (state) => {
+            //If by any chance, the token in localstorage is tampered/changed
+            //We should not stay logged in, hence, if request is rejected from backend,
+            //Remove that token from localstorage and ask user to login again for a new good token
+            state.user = null;
+            localStorage.removeItem('user');
+            toast.error('Session Expired - Please Login Again');
+            router.navigate('/');
+        })
         builder.addMatcher(isAnyOf(signInUser.fulfilled, fetchCurrentUser.fulfilled),(state, action) => {
                                 state.user = action.payload;
         });
 
-        builder.addMatcher(isAnyOf(signInUser.rejected, fetchCurrentUser.rejected), (_state, action) => {
+        builder.addMatcher(isAnyOf(signInUser.rejected), (_state, action) => {
             console.log(action.payload);
         });
     })
