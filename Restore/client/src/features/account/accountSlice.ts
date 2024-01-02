@@ -31,8 +31,11 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
 )
 
 export const fetchCurrentUser = createAsyncThunk<User>(
-    'account/signInUser',
+    'account/fetchCurrentUser',
     async (_, thunkAPI) => {
+        //Setting the current user in store, if we have it in local storage
+        thunkAPI.dispatch(setUser(JSON.parse(localStorage.getItem('user')!)));
+
         try{
             const user = await agent.Account.currentUser();
             //We need to persist the token received. Since, if our browser gets refreshed, all components are re-initialised
@@ -43,6 +46,12 @@ export const fetchCurrentUser = createAsyncThunk<User>(
         }
         catch(error: any){
             return thunkAPI.rejectWithValue({error: error.data})
+        }
+    },
+    {
+        condition: () =>{
+            //this will avoid calling getCurrentUser from backend if we do not have the token in localstorage
+            if(!localStorage.getItem('user')) return false;
         }
     }
 )
@@ -55,6 +64,9 @@ export const accountSlice = createSlice({
             state.user = null;
             localStorage.removeItem('user');
             router.navigate('/')
+        },
+        setUser: (state, action) => {
+            state.user = action.payload;
         }
     },
     extraReducers: (builder => {
@@ -68,6 +80,6 @@ export const accountSlice = createSlice({
     })
 })
 
-export const {signOut} = accountSlice.actions;
+export const {signOut, setUser} = accountSlice.actions;
     
 
