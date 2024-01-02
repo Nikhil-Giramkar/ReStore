@@ -1075,3 +1075,7 @@ Now, when we try to execute GetCurrentUser endpoint, we get the see token back.
 here, we'll use React Hook Form to use forms hook in react.
 Install in client folder
     npm install react-hook-form
+
+
+We can get any regex like for email/number etc. from 
+    https://regexlib.com/?AspxAutoDetectCookieSupport=1
