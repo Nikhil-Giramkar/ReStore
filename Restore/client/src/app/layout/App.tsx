@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Header from "./Header";
 import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { Outlet } from "react-router-dom";
@@ -6,11 +6,9 @@ import { ToastContainer } from "react-toastify";
 //Add css for toast notification
 import 'react-toastify/ReactToastify.css'
 // import { useStoreContext } from "../context/StoreContext";
-import { getCookie } from "../util/util";
-import agent from "../api/agent";
 import LoadingComponent from "./LoadingComponent";
 import { useAppDispactch } from "../store/configureStore";
-import { setBasket } from "../../features/basket/basketSlice";
+import { fetchBasketAsync } from "../../features/basket/basketSlice";
 import { fetchCurrentUser } from "../../features/account/accountSlice";
 
 function App() {
@@ -36,20 +34,21 @@ function App() {
   const dispatch = useAppDispactch();
   const [loading, setLoading] = useState(true);
 
+
+  const initApp = useCallback(async () => {
+    //UseCallback ensures that we do not re-render the component after doing once
+    try{
+      await dispatch(fetchCurrentUser());
+      await dispatch(fetchBasketAsync());
+    }
+    catch(error){
+      console.log(error);
+    }
+  }, [dispatch])
+
   useEffect(() => {
-    const buyerId = getCookie('buyerId');
-    dispatch(fetchCurrentUser());
-    
-    if(buyerId) {
-      agent.Basket.get()
-                  .then(basket => dispatch(setBasket(basket)))
-                  .catch(error => console.log(error))
-                  .finally(()=> setLoading(false))
-    }
-    else{
-      setLoading(false) //Even if I donot have buyerId, no need to keep loading
-    }
-  }, [dispatch]) //as soon as basket value changes, fetch the data again from backend
+    initApp().then(() => setLoading(false));
+  }, [initApp]) //as soon as basket value changes, fetch the data again from backend
 
   if(loading){
     return <LoadingComponent message="Initialising App..."/>
