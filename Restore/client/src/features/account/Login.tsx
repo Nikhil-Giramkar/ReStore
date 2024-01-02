@@ -7,15 +7,19 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Paper } from '@mui/material';
-import { Link } from 'react-router-dom';
-import agent from '../../app/api/agent';
+import { Link, useNavigate } from 'react-router-dom';
 import { FieldValues, useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
+import { useAppDispactch } from '../../app/store/configureStore';
+import { signInUser } from './accountSlice';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function Login() {
+
+    const navigate = useNavigate();
+    const dispatch = useAppDispactch();
 
     const {register, handleSubmit, formState: {isSubmitting, errors, isValid}} = useForm(
         {mode: 'onTouched'}
@@ -23,13 +27,9 @@ export default function Login() {
 
     async function submitForm(data: FieldValues)
     {
-        try{
-            await agent.Account.login(data);
-        }
-        catch(error)
-        {
-            console.log(error);
-        }
+       await dispatch(signInUser(data));
+       //After sign-in. we must be redirected to Catalog page
+       navigate('/catalog')
     }
 
     return (
