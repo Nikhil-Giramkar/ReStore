@@ -1138,3 +1138,8 @@ Then in that case, we can pass basket as null.
 So added a "?" before userBasket, so that if userBasket is null, we can pass basket as null to frontend
 Check on app once
 Bug resolved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+We had an internal server error which as not notified in frontend.
+So to solve that we will throw an error if encountered while logging in
+And catch it.

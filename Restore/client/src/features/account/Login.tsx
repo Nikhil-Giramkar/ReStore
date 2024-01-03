@@ -21,15 +21,19 @@ export default function Login() {
     const navigate = useNavigate();
     const dispatch = useAppDispactch();
 
-    const {register, handleSubmit, formState: {isSubmitting, errors, isValid}} = useForm(
-        {mode: 'onTouched'}
+    const { register, handleSubmit, formState: { isSubmitting, errors, isValid } } = useForm(
+        { mode: 'onTouched' }
     )
 
-    async function submitForm(data: FieldValues)
-    {
-       await dispatch(signInUser(data));
-       //After sign-in. we must be redirected to Catalog page
-       navigate('/catalog')
+    async function submitForm(data: FieldValues) {
+        try {
+            await dispatch(signInUser(data));
+            //After sign-in. we must be redirected to Catalog page
+            navigate('/catalog')
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
     return (
@@ -49,8 +53,8 @@ export default function Login() {
                         id="username"
                         label="Username"
                         autoFocus
-                        {...register('username', {required: 'Username is required'})}
-                        error = {!!errors.username}
+                        {...register('username', { required: 'Username is required' })}
+                        error={!!errors.username}
                         helperText={errors?.username?.message as string}
                     />
                     <TextField
@@ -58,13 +62,13 @@ export default function Login() {
                         fullWidth
                         label="Password"
                         type="password"
-                        {...register('password', {required: 'Password is required'})}
-                        error = {!!errors.password}
+                        {...register('password', { required: 'Password is required' })}
+                        error={!!errors.password}
                         helperText={errors?.password?.message as string}
                     />
                     <LoadingButton
-                        disabled = {!isValid}
-                        loading = {isSubmitting}
+                        disabled={!isValid}
+                        loading={isSubmitting}
                         type="submit"
                         fullWidth
                         variant="contained"
