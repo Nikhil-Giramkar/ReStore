@@ -49,7 +49,7 @@ namespace API.Controllers
             return new UserDTO{
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user),
-                Basket = anonymousBasket != null ? anonymousBasket.MapBasketToBasketDTO() : userBasket.MapBasketToBasketDTO()
+                Basket = anonymousBasket != null ? anonymousBasket.MapBasketToBasketDTO() : userBasket?.MapBasketToBasketDTO()
             };
         }
 

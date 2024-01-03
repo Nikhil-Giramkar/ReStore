@@ -1123,3 +1123,18 @@ Now logout, and login as some other User, maybe Admin.
 We see, our SignIn user request was rejected.
 This is a bug.
 Will solve this next.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+When we try to login as any other user than Bob,
+And check Network tab
+We see Internal Server Error when trying to login
+We see null reference exception.
+If we look at the terminal in VSCode in dotnet shell
+We see, the exact line where we got error.
+
+We missed  condition that if anonymous basket is not there
+And logged in User also has no basket.
+Then in that case, we can pass basket as null.
+So added a "?" before userBasket, so that if userBasket is null, we can pass basket as null to frontend
+Check on app once
+Bug resolved.
