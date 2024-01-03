@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Paper } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FieldValues, useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
 import { useAppDispactch } from '../../app/store/configureStore';
@@ -19,6 +19,8 @@ const defaultTheme = createTheme();
 export default function Login() {
 
     const navigate = useNavigate();
+    const location  = useLocation();
+
     const dispatch = useAppDispactch();
 
     const { register, handleSubmit, formState: { isSubmitting, errors, isValid } } = useForm(
@@ -28,8 +30,8 @@ export default function Login() {
     async function submitForm(data: FieldValues) {
         try {
             await dispatch(signInUser(data));
-            //After sign-in. we must be redirected to Catalog page
-            navigate('/catalog')
+            //After sign-in. we must be redirected to where we came from or to Catalog page
+            navigate(location.state?.from || '/catalog');
         } catch (error) {
             console.log(error);
         }

@@ -1143,3 +1143,11 @@ Bug resolved.
 We had an internal server error which as not notified in frontend.
 So to solve that we will throw an error if encountered while logging in
 And catch it.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Added a security to checkout page
+Where we redirect the user to login if he is anonymous.
+And show that Checkout Page if logged in.
+
+Note: This is not a trong security, since we are not valdating any tokens here,
+its just like a curtain to avoid user to see checkout page if anonymous.
