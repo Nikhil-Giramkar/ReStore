@@ -1,9 +1,12 @@
+using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -11,11 +14,13 @@ namespace API.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly TokenService _tokenService;
+        private readonly StoreContext _context;
 
-        public AccountController(UserManager<User> userManager, TokenService tokenService)
+        public AccountController(UserManager<User> userManager, TokenService tokenService, StoreContext context)
         {
             _tokenService = tokenService;
             _userManager = userManager;
+            _context = context;
         }
 
         [HttpPost("login")]
@@ -25,9 +30,26 @@ namespace API.Controllers
             if(user==null || !await _userManager.CheckPasswordAsync(user, loginDTO.Password))
                 return Unauthorized();
 
+            var userBasket  = await RetrieveBasket(loginDTO.Username);
+            var anonymousBasket = await RetrieveBasket(Request.Cookies["buyerId"]);
+
+            if(anonymousBasket!=null)
+            {
+                if(userBasket!=null){
+                    //in case we have anonymous basket before loging in and a user basket is also there
+                    //The anonymous basket should be taken and user basket must get deleted
+                    _context.Baskets.Remove(userBasket);
+                }
+
+                anonymousBasket.BuyerId = user.UserName; //anonymous basket assigned to logged in user
+                Response.Cookies.Delete("buyerId");
+                await _context.SaveChangesAsync();
+            }
+
             return new UserDTO{
                 Email = user.Email,
-                Token = await _tokenService.GenerateToken(user)
+                Token = await _tokenService.GenerateToken(user),
+                Basket = anonymousBasket != null ? anonymousBasket.MapBasketToBasketDTO() : userBasket.MapBasketToBasketDTO()
             };
         }
 
@@ -67,6 +89,23 @@ namespace API.Controllers
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user)
             };
+        }
+
+        private async Task<Basket> RetrieveBasket(string buyerId)
+        {
+            if (string.IsNullOrEmpty(buyerId))
+            {
+                //if buyerId or user's name is not found, no basket can be retrieved
+                //Delete the cookie if it exists and return null
+                Response.Cookies.Delete("buyerId");
+                return null;
+            }
+
+            var basket = await _context.Baskets
+                        .Include(i => i.Items) //This is needed to include the basket items
+                        .ThenInclude(p => p.Product) //Basket Item has relation with products, so need to include products as well
+                        .FirstOrDefaultAsync(x => x.BuyerId == buyerId); //We will fetc the buyerId from User's cookie stored in his browser.
+            return basket;
         }
 
     }

@@ -1079,3 +1079,17 @@ Install in client folder
 
 We can get any regex like for email/number etc. from 
     https://regexlib.com/?AspxAutoDetectCookieSupport=1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+The requirement now is that,
+When user is not logged in, he can keep adding products to cart.
+When user logs in, this anonymous basket can be transferred to logged in user.
+
+When user logs out, this basket, the cookie can be deleted.
+And a new cookie/basket can be generated when user starts adding products to cart as anonymous user.
+
+When logged-in user has basket and before logging in, he also had a anonymous basket.
+Then anonymous basket overrides the user basket.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
