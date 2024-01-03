@@ -1093,3 +1093,33 @@ Then anonymous basket overrides the user basket.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
+After making the required changes in FrontEnd,
+
+Start the app,
+Logout if already logged In
+Clear the cookie manually
+
+Add few items to cart
+Check the buyer ID generated in SqLite DB and Cookie
+They are same as expected.
+
+Now Login as Bob,
+Here, the buyerID (Guid) is replaced by "Bob" (username)
+Check in SqliteDB
+The cookie is deleted now
+But if we check the setBasket state via Redux toolkit, we see Guid replaced by Username
+
+Now sign out, 
+Basket is cleared
+
+Now add an item in cart
+We see new buyerId generated in SqliteDb and Cookie
+
+Now again Sign In as Bob,
+Notice, the anonymous basket is retained and earlier basket is removed for Bob.
+In SqlLite DB, the new buyerId generated has also been removed and also the cookie is removed.
+
+Now logout, and login as some other User, maybe Admin.
+We see, our SignIn user request was rejected.
+This is a bug.
+Will solve this next.
