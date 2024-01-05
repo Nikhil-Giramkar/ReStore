@@ -1151,3 +1151,10 @@ And show that Checkout Page if logged in.
 
 Note: This is not a trong security, since we are not valdating any tokens here,
 its just like a curtain to avoid user to see checkout page if anonymous.
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+                                                SECTION 9 - Checkout
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Create all the required contracts / models fro Checkout page
