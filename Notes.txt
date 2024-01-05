@@ -1175,3 +1175,34 @@ But Defining relation in StoreDbContext is another approach.
 
 Update IdentityRole to Role in Program.cs as well.
 
+---------------------------------------------------------------------------------------------------------------------------------------------
+Currently, we are having multiple migrations in Migration folder.
+Now we aim to drop our database and create a new migration again.
+With all the changes.
+Do not worry, as we will get our DB back since we created seed data.
+
+Go to CLI -> api folder
+    dotnet ef database drop
+
+Observe store.db is deleted 
+Now delete migrations folder too
+
+Make ShippingAddress as Required as warned while doing migrations for first time.
+
+Now we will create anpther migration
+    dotnet ef migrations add OrderEntityAddedd -o Data/Migrations
+
+Now observe the migration class created by EF.
+All Identity classes now use Integer type.
+
+Shipping Address does not have its own table
+Its properties are appended as columns inside Order Table, since we marked it as [Owned] in Contract class.
+
+Now as soon as I run 
+    dotent run command.
+All tables are created as noticed in terminal.
+Also verify in SqliteDb Explorer.
+
+Notice, as given in DbInitializer.
+Bob and Admin Users are back.
+As well as the Products.
