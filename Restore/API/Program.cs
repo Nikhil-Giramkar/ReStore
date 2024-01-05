@@ -16,15 +16,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c => {
-    var jwtSecurityScheme = new OpenApiSecurityScheme{
+builder.Services.AddSwaggerGen(c =>
+{
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
         BearerFormat = "JWT",
         Name = "Authorization",
-        In  = ParameterLocation.Header,
+        In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
         Scheme = JwtBearerDefaults.AuthenticationScheme,
         Description = "Put Bearer  + ypor token in the box below",
-        Reference = new OpenApiReference{
+        Reference = new OpenApiReference
+        {
             Id = JwtBearerDefaults.AuthenticationScheme,
             Type = ReferenceType.SecurityScheme
         }
@@ -42,23 +45,26 @@ builder.Services.AddSwaggerGen(c => {
 
 //Register DbContext service and pass Default connection string as DbContext option
 //As required in StoreContext.cs
-builder.Services.AddDbContext<StoreContext>(options => {
+builder.Services.AddDbContext<StoreContext>(options =>
+{
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnectionString"));
 });
 
 builder.Services.AddCors();
 
-builder.Services.AddIdentityCore<User>( opt =>
+builder.Services.AddIdentityCore<User>(opt =>
     {
         opt.User.RequireUniqueEmail = true;
     }
 )
-        .AddRoles<IdentityRole>()
+        .AddRoles<Role>()
         .AddEntityFrameworkStores<StoreContext>(); //This adds a few tables in DB related to identity (around 6)
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(opt => {
-                    opt.TokenValidationParameters = new TokenValidationParameters{
+                .AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
                         ValidateIssuer = false,
                         ValidateAudience = false,
                         ValidateLifetime = true,
@@ -87,14 +93,16 @@ app.UseMiddleware<ExceptionMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => {
+    app.UseSwaggerUI(c =>
+    {
         c.ConfigObject.AdditionalItems.Add("persistAuthorization", "true");
     });
 }
 
 //app.UseHttpsRedirection(); //Will not use this for dev, will use this in Production, hence commented
 
-app.UseCors(opt => {
+app.UseCors(opt =>
+{
     opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
     //Any Header, Any method - GET,PUT,POST,DELETE
     //AllowCredentials() will allow to pass cookies from 3000 to 5000 and vice versa
@@ -111,11 +119,13 @@ var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<StoreContext>();
 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-try{
+try
+{
     await context.Database.MigrateAsync();
     await DbInitializer.Initialize(context, userManager);
 }
-catch(Exception ex){
+catch (Exception ex)
+{
     logger.LogError(ex, "A problem occurred during migration");
 }
 app.Run(); //Terminal middleware

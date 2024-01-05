@@ -1157,4 +1157,21 @@ its just like a curtain to avoid user to see checkout page if anonymous.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Create all the required contracts / models fro Checkout page
+Create all the required contracts / models fro Checkout page.
+
+By Default IdentityUser class uses Id as string property.
+Noe this becomes inconveient when we have related properties like UserAddress.
+Hence we we explicity mark Identity to use <int> Id
+
+Now since IdentityUser uses int,
+We need to define Role class to use int explicitly.
+Snce Role uses string Id, so we did not have to mention it before.
+
+Update StoreDbContext, mention that we use new Role class instead of IdentityRole due to changed data type.
+Define relation between User and Address in StoreDbContext.
+
+We could have created a UserDTO to define that relation like we created for Basket and BasketItems (circular reference).
+But Defining relation in StoreDbContext is another approach.
+
+Update IdentityRole to Role in Program.cs as well.
+

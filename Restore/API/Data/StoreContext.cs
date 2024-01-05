@@ -7,7 +7,7 @@ using API.Entities.OrderAggregate;
 namespace API.Data
 {
     //This represents Database as it extends DbContext class
-    public class StoreContext : IdentityDbContext<User>
+    public class StoreContext : IdentityDbContext<User, Role, int>
     {
         //Constructor
         public StoreContext(DbContextOptions options) : base(options)
@@ -24,10 +24,16 @@ namespace API.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<IdentityRole>()
+            builder.Entity<User>()
+                .HasOne(a => a.Address) //Defining 1 to 1 relation between User and Address
+                .WithOne()
+                .HasForeignKey<UserAddress>(a => a.Id) //UserAddress.Id is foreignKey
+                .OnDelete(DeleteBehavior.Cascade); //When User deleted, UserAddress should also be deleted.
+
+            builder.Entity<Role>()
                 .HasData(
-                    new IdentityRole{Name="Member", NormalizedName= "MEMBER"},
-                    new IdentityRole{Name="Admin", NormalizedName= "ADMIN"}
+                    new Role{Id = 1, Name="Member", NormalizedName= "MEMBER"},
+                    new Role{Id = 2, Name="Admin", NormalizedName= "ADMIN"}
                 );
         }
     }
