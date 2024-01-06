@@ -1206,3 +1206,9 @@ Also verify in SqliteDb Explorer.
 Notice, as given in DbInitializer.
 Bob and Admin Users are back.
 As well as the Products.
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+At this point, we need to validate our AddressForm.tsx
+So we will use validation library provided by react-hook-form called "yup"
+Goto CLI in client folder
+    npm install @hookform/resolvers yup
