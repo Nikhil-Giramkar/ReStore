@@ -1212,3 +1212,56 @@ At this point, we need to validate our AddressForm.tsx
 So we will use validation library provided by react-hook-form called "yup"
 Goto CLI in client folder
     npm install @hookform/resolvers yup
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+                                                SECTION 10 - Payment
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+While settig up Payments, we need to consider PCI Compliance.
+
+Payment Card Industry Data Security Statndard
+---------------------------------------------
+
+Its a set of industry standards
+Designed to protect Payment card data
+Increased protection for customers and reduced risk of data breaches and involving personal card data
+
+Its guidelines include:
+--------------------------
+Building and maintaining a secure network
+Protecting Card Holder Data
+Maintaining a vilnerability management program
+Implementing strong access control measures
+Regular monitor and text networks
+Maintaining an info security policy.
+
+Setting up PCI Compliance requires money
+and its only worth when we are profitable
+
+PCI Non-compliance may lead to penalties
+- Mnthly penalty from $5,000 to $10,000
+- Infringement consequences ($50 to $90 per card holder)
+- Compensation cost.
+- Legal action
+- Damaged Reputation
+- Revenue Loss
+- Federal Audits
+****** NEVER STORE PEOPLE's CREDIT CARD INFORMATION ON YOUR SERVER ********
+
+Best way to handle payments is to use a Payment Card Processor
+E.g. Stripe
+
+String Customer Authentication (SCA)
+    Its a EU standard for authenticating online payments.
+    Requires 2 out of 3 elements
+        Something customer knows (Pin/ Password)
+        Something Customer Has (Phone/ HW token)
+        Something Customer Is (biomentric)
+        
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Note:
+I have not included Payments - Deployment - Roles and CRUD Operations
+Not in the scope of this app.
+Can refer to the Udemy Course: https://www.udemy.com/course/learn-to-build-an-e-commerce-store-with-dotnet-react-redux/
+For developing these sections in future.
+--------------------------------------------------------------------------------------------------------------------------------------------------------
