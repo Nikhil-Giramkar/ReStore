@@ -1,7 +1,7 @@
 # ReStore
 ## An e-commerce web application built with ASP.NET Core and React-Redux
 ### Credits to Neil Cummings and Udemy (https://www.udemy.com/course/learn-to-build-an-e-commerce-store-with-dotnet-react-redux/)
-### Created complete application from scratch along with the course.
+### Created complete application from scratch along with the course. Have a look at commit history for better uderstanding.
 
 # Preview of the App
 ## Catalog Page
